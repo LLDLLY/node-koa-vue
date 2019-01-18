@@ -16,13 +16,13 @@ const actions = {
   async getHomeDataFn({commit},data){
     let res = await api.getHomeInitDataApi();
     if(res.data.code == 200){
-       commit()
+       commit('homeData',res.data.data)
+       console.log(res.data.data)
     }
     
   }
 
 }
-
 
 export default {
   state,

@@ -22,6 +22,7 @@
   </div>
 </template>
 <script>
+import { mapState, mapActions } from "vuex";
 import Banner from "../components/banner.vue";
 export default {
   components: {
@@ -35,7 +36,13 @@ export default {
       imagesList: []
     };
   },
-  created() {},
+  computed: {
+    ...mapState(["homeData"])
+  },
+  created() {
+    // this.getHomeDataFn();
+    console.log(this.$store)
+  },
   methods: {
     onSearch() {
       alert(11);
@@ -43,7 +50,8 @@ export default {
     selectCity() {},
     onCancel() {
       this.search = "";
-    }
+    },
+    // ...mapActions({ getHomeDataFn: "getHomeDataFn" })
   },
   watch: {
     search() {
