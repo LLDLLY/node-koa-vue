@@ -2,11 +2,11 @@
   <div id="Banner">
     <van-swipe :autoplay="autoplay">
       <van-swipe-item
-        v-for="(image, index) in imagesList"
+        v-for="(item, index) in imagesList"
         :key="index"
         @click.native="goGoodsInfo(item.goodsId)"
       >
-        <img v-lazy="image">
+        <img v-lazy="item.image">
       </van-swipe-item>
     </van-swipe>
   </div>
@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     goGoodsInfo(id) {
-      this.$router.push({ path: "/goods", qurey: { id: id } });
+      this.$router.push({ path: "/goods", query: { 'goodsId': id }});
     }
   }
 };
@@ -34,8 +34,11 @@ export default {
 <style>
 #Banner {
   clear: both;
-  max-height: 12rem;
+  max-height: 9rem;
   overflow: hidden;
+}
+img{
+  width: 100%;
 }
 </style>
 

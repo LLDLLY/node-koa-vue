@@ -19,10 +19,18 @@
     </van-row>
     <van-notice-bar mode="closeable">商城开业大酬宾，线上线下全部5折，全部5折!!! 下单满199元，免费赠送礼品一份，数量有限，送完为止</van-notice-bar>
     <Banner :imagesList="imagesList"></Banner>
+    <div class="Category">
+      <ul>
+        <li v-for="(item,index) in homeData.category" :key="index">
+          <img  @click='toCategory(item.mallCategoryId)'  :src="item.image" alt>
+          <p>{{item.mallCategoryName}}</p>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapGetters } from "vuex";
 import Banner from "../components/banner.vue";
 export default {
   components: {
@@ -37,21 +45,26 @@ export default {
     };
   },
   computed: {
-    ...mapState(["homeData"])
+    ...mapGetters({
+      homeData: "getHomeInitData"
+    })
   },
   created() {
-    // this.getHomeDataFn();
-    console.log(this.$store)
+    this.$store.dispatch("getHomeDataFn").then(() => {
+      this.imagesList = this.homeData.slides;
+    });
   },
   methods: {
+    toCategory(id){
+      this.$router.push({path:'categorylist',query:{'CategoryId':id}})
+    },
     onSearch() {
       alert(11);
     },
     selectCity() {},
     onCancel() {
       this.search = "";
-    },
-    // ...mapActions({ getHomeDataFn: "getHomeDataFn" })
+    }
   },
   watch: {
     search() {
@@ -84,9 +97,23 @@ export default {
     height: 100%;
   }
 }
-.banner {
-  height: 8rem;
-  background-color: blue;
+.Category {
+  ul {
+    display: flex;
+    width: 100%;
+    li {
+      flex: 1;
+      padding: 0.5rem;
+      img {
+        width: 100%;
+      }
+      p{
+        margin-top: 0;
+        font-size: 0.61rem;
+        text-align: center;
+      }
+    }
+  }
 }
 </style>
 
