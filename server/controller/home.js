@@ -10,7 +10,6 @@ class HomeData {
             data:homeData.data
         };
 
-
     }
 }
 module.exports = HomeData

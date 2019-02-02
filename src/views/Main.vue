@@ -95,7 +95,7 @@ export default {
 </script>
 
 <style scoped>
-  div{
-
+  #app{
+    padding-bottom: 2.5rem;
   }
 </style>

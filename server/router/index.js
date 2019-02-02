@@ -1,12 +1,17 @@
 const Router = require('koa-router')
 const UserController = require('../controller/user')
 const HomeController = require('../controller/home')
+const GoodsController = require('../controller/goods')
+
+
 
 const router = new Router({
     prefix: '/api/v1'
 })
 
-/**home 页面数据 */
+/**
+ * home 页面数据
+ */
 router.get('/home',HomeController.getHomeInitData)
 
 /**
@@ -23,5 +28,10 @@ router.get('/user/info', UserController.getUserInfo);
 // 获取用户列表
 router.get('/user/list', UserController.getUserList);
 
+
+/**
+ * 商品接口
+ */
+router.get('/goods/getGoodsDetail',GoodsController.getGoodsDetail)
 
 module.exports = router

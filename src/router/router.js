@@ -9,14 +9,17 @@ export default new Router({
     routes: [
         {
             path: "/",
-            // name: "home",
             redirect: '/home',
-            // component: resolve => { require(['@/views/Main.vue'], resolve) }
         },
         {
             path: '/home',
             name: 'ShoppingMall',
             component: resolve =>{require(['@/views/ShoppingMall.vue'],resolve) }
+        },
+        {
+            path: '/goods',
+            name: 'Goods',
+            component: resolve =>{require(['@/views/Goods.vue'],resolve) }
         },
     ]
 });
