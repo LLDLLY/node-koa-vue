@@ -1,111 +1,16 @@
 <template>
   <div>
-    <van-nav-bar title="商品详情" left-text="返回" left-arrow @click-left="backFn"/>
-    <div class="goods_img">
-      <img src="http://images.baixingliangfan.cn/shopGoodsImg/20180407/20180407173221_2015.jpg" alt>
+    <div>
+      <van-nav-bar fixed="true" title="商品详情" left-text="返回" left-arrow @click-left="backFn"/>
     </div>
-    <p class="good_title">单身狗粮地中海盐味薯片 71g/袋</p>
-    <p class="good_price">价格: ￥8.00元</p>
-    <van-tabs v-model="active">
+    <div class="goods_img">
+      <img :src="goodsDetail.IMAGE1" alt>
+    </div>
+    <p class="good_title">{{goodsDetail.NAME}}</p>
+    <p class="good_price">价格: ￥{{goodsDetail.PRESENT_PRICE | toMoney}}元</p>
+    <van-tabs swipeable sticky :offset-top='46'>
       <van-tab title="商品详情">
-        <div class="detail">
-          <img
-            src="http://images.baixingliangfan.cn/shopGoodsDetailImg/20180407/20180407173924_656.jpg"
-            width="100%"
-            height="auto"
-            alt
-          >
-          <img
-            src="http://images.baixingliangfan.cn/shopGoodsDetailImg/20180407/20180407173924_3700.jpg"
-            width="100%"
-            height="auto"
-            alt
-          >
-          <img
-            src="http://images.baixingliangfan.cn/shopGoodsDetailImg/20180407/20180407173924_3416.jpg"
-            width="100%"
-            height="auto"
-            alt
-          >
-          <img
-            src="http://images.baixingliangfan.cn/shopGoodsDetailImg/20180407/20180407173924_8458.jpg"
-            width="100%"
-            height="auto"
-            alt
-          >
-          <img
-            src="http://images.baixingliangfan.cn/shopGoodsDetailImg/20180407/20180407173925_2665.jpg"
-            width="100%"
-            height="auto"
-            alt
-          >
-          <img
-            src="http://images.baixingliangfan.cn/shopGoodsDetailImg/20180407/20180407173925_8040.jpg"
-            width="100%"
-            height="auto"
-            alt
-          >
-          <img
-            src="http://images.baixingliangfan.cn/shopGoodsDetailImg/20180407/20180407173925_35.jpg"
-            width="100%"
-            height="auto"
-            alt
-          >
-          <img
-            src="http://images.baixingliangfan.cn/shopGoodsDetailImg/20180407/20180407173925_9446.jpg"
-            width="100%"
-            height="auto"
-            alt
-          >
-          <img
-            src="http://images.baixingliangfan.cn/shopGoodsDetailImg/20180407/20180407173925_2297.jpg"
-            width="100%"
-            height="auto"
-            alt
-          >
-          <img
-            src="http://images.baixingliangfan.cn/shopGoodsDetailImg/20180407/20180407173926_787.jpg"
-            width="100%"
-            height="auto"
-            alt
-          >
-          <img
-            src="http://images.baixingliangfan.cn/shopGoodsDetailImg/20180407/20180407173926_9998.jpg"
-            width="100%"
-            height="auto"
-            alt
-          >
-          <img
-            src="http://images.baixingliangfan.cn/shopGoodsDetailImg/20180407/20180407173926_759.jpg"
-            width="100%"
-            height="auto"
-            alt
-          >
-          <img
-            src="http://images.baixingliangfan.cn/shopGoodsDetailImg/20180407/20180407173926_402.jpg"
-            width="100%"
-            height="auto"
-            alt
-          >
-          <img
-            src="http://images.baixingliangfan.cn/shopGoodsDetailImg/20180407/20180407173926_38.jpg"
-            width="100%"
-            height="auto"
-            alt
-          >
-          <img
-            src="http://images.baixingliangfan.cn/shopGoodsDetailImg/20180407/20180407173926_9482.jpg"
-            width="100%"
-            height="auto"
-            alt
-          >
-          <img
-            src="http://images.baixingliangfan.cn/shopGoodsDetailImg/20180407/20180407173927_7697.jpg"
-            width="100%"
-            height="auto"
-            alt
-          >
-        </div>
+        <div class="detail" v-html="goodsDetail.DETAIL"></div>
       </van-tab>
       <van-tab title="评论">
         <ul>
@@ -143,11 +48,12 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { toMoney } from "../filter/moneyFilter.js";
 export default {
   name: "Goods",
   data() {
     return {
-      id:this.$route.query.goodsId,
+      id: this.$route.query.goodsId,
       active: 0,
       goodsId: "",
       goodsInfo: {}, // 商品详情
@@ -160,9 +66,7 @@ export default {
     })
   },
   created() {
-    this.$store.dispatch('getGoodsDetailFn',this.id).then(res=>{
-      console.log(res)
-    })
+    this.$store.dispatch("getGoodsDetailFn", this.id);
   },
   methods: {
     backFn() {
@@ -186,9 +90,11 @@ h1.name {
   color: #333;
 }
 .avatar img {
+  width: 1.5rem;
   border-radius: 50%;
 }
 .goods_img {
+  padding-top: 46px;
   img {
     width: 100%;
   }

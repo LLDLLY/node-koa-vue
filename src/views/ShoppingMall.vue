@@ -39,7 +39,7 @@
             <p class="recommend-name">{{item.goodsName}}</p>
             <p
               class="recommend-price"
-            >￥{{item.price | moneyFilter}}(￥{{item.mallPrice | moneyFilter}})</p>
+            >￥{{item.price | toMoney}}(￥{{item.mallPrice | toMoney}})</p>
           </div>
         </swiper-slide>
       </swiper>
@@ -62,7 +62,7 @@
         <li v-for="(item,index) in homeData.hotGoods" :key="index">
           <img :src="item.image" alt>
           <p class="hot-title">{{item.name}}</p>
-          <p class="hot-price">￥{{item.price | moneyFilter}}({{item.mallPrice | moneyFilter}})</p>
+          <p class="hot-price">￥{{item.price | toMoney}}({{item.mallPrice | toMoney}})</p>
         </li>
       </ul>
     </div>
@@ -72,7 +72,6 @@
 import { mapState, mapActions, mapGetters } from "vuex";
 import Banner from "../components/banner.vue";
 import Foods from "../components/foods.vue";
-import { toMoney } from "../filter/moneyFilter.js";
 import "swiper/dist/css/swiper.css";
 import { swiper, swiperSlide } from "vue-awesome-swiper";
 export default {
@@ -97,11 +96,6 @@ export default {
     ...mapGetters({
       homeData: "getHomeInitData"
     })
-  },
-  filters: {
-    moneyFilter(val) {
-      return toMoney(val);
-    }
   },
   created() {
     this.$store.dispatch("getHomeDataFn").then(() => {
