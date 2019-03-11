@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <van-nav-bar fixed="true" title="商品详情" left-text="返回" left-arrow @click-left="backFn"/>
+      <van-nav-bar fixed title="商品详情" left-text="返回" left-arrow @click-left="backFn"/>
     </div>
     <div class="goods_img">
       <img :src="goodsDetail.IMAGE1" alt>
@@ -14,30 +14,17 @@
       </van-tab>
       <van-tab title="评论">
         <ul>
-          <li class="rating-item van-hairline--bottom">
+          <li class="rating-item van-hairline--bottom" v-for="(item,index) in goodsComments" :key='index'>
             <div class="avatar">
               <img
                 width="28"
                 height="28"
-                src="http://static.galileo.xiaojukeji.com/static/tms/default_header.png"
+                :src="item.avatar"
               >
             </div>
             <div class="content">
-              <h1 class="name">3******c</h1>
-              <p class="text">不错,粥很好喝,我经常吃这一家,非常赞,以后也会常来吃,强烈推荐.</p>
-            </div>
-          </li>
-          <li class="rating-item van-hairline--bottom">
-            <div class="avatar">
-              <img
-                width="28"
-                height="28"
-                src="http://static.galileo.xiaojukeji.com/static/tms/default_header.png"
-              >
-            </div>
-            <div class="content">
-              <h1 class="name">3******b</h1>
-              <p class="text"></p>
+              <h1 class="name">{{item.username}}</h1>
+              <p class="text">{{item.text}}</p>
             </div>
           </li>
         </ul>
@@ -62,11 +49,13 @@ export default {
   },
   computed: {
     ...mapGetters({
-      goodsDetail: "getGoodsDetailGetter"
+      goodsDetail: "getGoodsDetailGetter",
+      goodsComments: "getGoodSCommentGetter"
     })
   },
   created() {
     this.$store.dispatch("getGoodsDetailFn", this.id);
+    this.$store.dispatch("getGoodsCommentsFn", this.id);
   },
   methods: {
     backFn() {
@@ -86,8 +75,9 @@ h1.name {
   font-size: 0.6rem;
 }
 .text {
-  font-size: 0.55rem;
-  color: #333;
+  font-size: 0.5rem;
+  color: #555;
+  padding-left: 10px;
 }
 .avatar img {
   width: 1.5rem;

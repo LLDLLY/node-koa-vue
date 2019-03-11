@@ -8,3 +8,8 @@ export function getHomeInitDataApi() {
 export function getGoodsDetailApi(id) {
     return axios.get(`/goods/getGoodsDetail`, { params: { id: id } })
 }
+
+// 商品详情
+export function getGoodsCommentApi() {
+    return axios.get(`/goods/commentsList`)
+}

@@ -32,3 +32,26 @@ npm run test:unit
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### server API
+
+```
+ http://localhost:3001/api/v1
+
+```
+
+1.首页数据
+```
+/home
+```
+
+2.商品详情
+```
+/goods/getGoodsDetail
+```
+
+3.商品评论
+```
+/goods/commentsList
+```
+

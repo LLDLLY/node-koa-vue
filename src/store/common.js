@@ -3,7 +3,8 @@ import { Toast } from 'vant';
 
 const state = {
   homeData: {},
-  goodsDetail:{}
+  goodsDetail:{},
+  goodsComments:{}
 }
 
 const mutations = {
@@ -13,6 +14,10 @@ const mutations = {
   getGoodsDetail(state, data) {
     state.goodsDetail = data
   },
+  getGoodsComments(state,data){
+    state.goodsComments = data
+  },
+  
 }
 
 const actions = {
@@ -32,12 +37,21 @@ const actions = {
     }else {
        Toast("服务器繁忙，请稍后重试");
     }
+  },
+  async getGoodsCommentsFn({commit}){
+    const res = await api.getGoodsCommentApi();
+    if(res.data.code == 200){
+       commit('getGoodsComments',res.data.data);
+    }else {
+       Toast("服务器繁忙，请稍后重试");
+    }
   }
 
 }
 const getters={
   getHomeInitData: state =>state.homeData,
-  getGoodsDetailGetter:state =>state.goodsDetail
+  getGoodsDetailGetter:state =>state.goodsDetail,
+  getGoodSCommentGetter:state=>state.goodsComments
 }
 
 export default {
