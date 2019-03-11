@@ -21,5 +21,10 @@ export default new Router({
             name: 'Goods',
             component: resolve =>{require(['@/views/Goods.vue'],resolve) }
         },
+        {
+            path: '/categorylist',
+            name: 'Categorylist',
+            component: resolve =>{require(['@/views/Categorylist.vue'],resolve) }
+        },
     ]
 });

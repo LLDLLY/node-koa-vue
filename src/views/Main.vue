@@ -10,7 +10,7 @@
         首页
       </van-tabbar-item>
       <van-tabbar-item icon="records">
-        商品列表
+        商品分类
       </van-tabbar-item>
       <van-tabbar-item icon="cart" >
         购物车
@@ -97,5 +97,6 @@ export default {
 <style scoped>
   #app{
     padding-bottom: 2.5rem;
+    height: 100%;
   }
 </style>

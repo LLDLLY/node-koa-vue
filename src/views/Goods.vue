@@ -4,10 +4,10 @@
       <van-nav-bar fixed title="商品详情" left-text="返回" left-arrow @click-left="backFn"/>
     </div>
     <div class="goods_img">
-      <img :src="goodsDetail.IMAGE1" alt>
+      <img :src="goodsDetail&&goodsDetail.IMAGE1" alt>
     </div>
-    <p class="good_title">{{goodsDetail.NAME}}</p>
-    <p class="good_price">价格: ￥{{goodsDetail.PRESENT_PRICE | toMoney}}元</p>
+    <p class="good_title">{{goodsDetail&&goodsDetail.NAME}}</p>
+    <p class="good_price">价格: ￥{{goodsDetail&&goodsDetail.PRESENT_PRICE | toMoney}}元</p>
     <van-tabs swipeable sticky :offset-top='46'>
       <van-tab title="商品详情">
         <div class="detail" v-html="goodsDetail.DETAIL"></div>
@@ -30,6 +30,10 @@
         </ul>
       </van-tab>
     </van-tabs>
+    <div class="bottom_button">
+        <van-button type="primary" @click = 'toCar'>加入购物车</van-button>
+        <van-button type="danger" @click = 'toPay'>直接购买</van-button>
+    </div>
   </div>
 </template>
 
@@ -44,7 +48,7 @@ export default {
       active: 0,
       goodsId: "",
       goodsInfo: {}, // 商品详情
-      ratings: [] // 商品评论
+      ratings: []    // 商品评论
     };
   },
   computed: {
@@ -60,6 +64,12 @@ export default {
   methods: {
     backFn() {
       this.$router.back();
+    },
+    toCar() {
+alert(1)
+    },
+    toPay(){
+alert(1)
     }
   }
 };
@@ -106,4 +116,17 @@ h1.name {
   display: flex;
   padding: 0.5rem;
 }
+.bottom_button{
+  background-color: #fff;
+  padding: 5px;
+  width:100%;
+  position: fixed;
+  bottom: 2.5rem;
+  text-align: center;
+  box-sizing: border-box;
+  button{
+    width: 47%;
+    margin: 0 2.5px ;
+  }
+} 
 </style>
