@@ -39,4 +39,12 @@ router.get('/goods/getGoodsDetail',GoodsController.getGoodsDetail)
  */
 router.get('/goods/commentsList',GoodsController.getCommentsList)
 
+/** 
+ * 商品分类
+ */
+router.get('/goods/getCategories',GoodsController.getCategories);
+router.get('/goods/getCategoriesChild',GoodsController.getCategoriesChild);
+router.post('/goods/getCategoriesChildList',GoodsController.getCategoriesChildList);
+
+
 module.exports = router

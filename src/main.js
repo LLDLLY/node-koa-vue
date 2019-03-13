@@ -4,8 +4,8 @@ import router from "./router/router";
 import store from "./store/index";
 import filters from './filter/moneyFilter'
 
-import { Button, Tabbar, TabbarItem, NavBar, Icon, Search, Row, Col, NoticeBar, Swipe, SwipeItem, Lazyload, Toast, Tab, Tabs } from 'vant';
-Vue.use(Button).use(Tabbar).use(TabbarItem).use(NavBar).use(Icon).use(Search).use(Row).use(Col).use(NoticeBar).use(Swipe).use(SwipeItem).use(Lazyload).use(Toast).use(Tab).use(Tabs);
+import { Button, Tabbar, TabbarItem, NavBar, Icon, Search, Row, Col, NoticeBar, Swipe, SwipeItem, Lazyload, Toast, Tab, Tabs ,List} from 'vant';
+Vue.use(Button).use(Tabbar).use(TabbarItem).use(NavBar).use(Icon).use(Search).use(Row).use(Col).use(NoticeBar).use(Swipe).use(SwipeItem).use(Lazyload).use(Toast).use(Tab).use(Tabs).use(List);
 
 Vue.config.productionTip = false;
 

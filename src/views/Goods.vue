@@ -12,7 +12,7 @@
       <van-tab title="商品详情">
         <div class="detail" v-html="goodsDetail.DETAIL"></div>
       </van-tab>
-      <van-tab title="评论">
+      <van-tab title="评论" @click='()=>{alert(66)}'>
         <ul>
           <li class="rating-item van-hairline--bottom" v-for="(item,index) in goodsComments" :key='index'>
             <div class="avatar">
