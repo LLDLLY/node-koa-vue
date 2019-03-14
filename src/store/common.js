@@ -56,8 +56,7 @@ const actions = {
     }else {
        Toast("服务器繁忙，请稍后重试");
     }
-  }
-  
+  },
 
 }
 const getters={

@@ -58,6 +58,7 @@ export default {
     })
   },
   created() {
+     window.scrollTo(0, 0);
     this.$store.dispatch("getGoodsDetailFn", this.id);
     this.$store.dispatch("getGoodsCommentsFn", this.id);
   },
@@ -95,6 +96,7 @@ h1.name {
 }
 .goods_img {
   padding-top: 46px;
+  min-height: 3rem;
   img {
     width: 100%;
   }
@@ -111,6 +113,7 @@ h1.name {
 }
 .detail {
   font-size: 0;
+  min-height: 5rem;
 }
 .rating-item {
   display: flex;

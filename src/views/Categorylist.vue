@@ -7,20 +7,12 @@
       <van-row type="flex">
         <van-col span="6">
           <ul class="cate_big">
-            <li
-              v-for="(item,index) in goodsCategories"
-              :key="index"
-              @click="getCategoriesChild(item.ID)"
-            >{{item.MALL_CATEGORY_NAME}}</li>
+            <li v-for="(item,index) in goodsCategories" :key="index" @click="getCategoriesChild(item.ID)" >{{item.MALL_CATEGORY_NAME}}</li>
           </ul>
         </van-col>
         <van-col span="18">
           <van-tabs v-model="active" @click="changeTab">
-            <van-tab
-              v-for="(item,index) in categoriesChild"
-              :key="index"
-              :title="item.MALL_SUB_NAME"
-            >
+            <van-tab v-for="(item,index) in categoriesChild" :key="index" :title="item.MALL_SUB_NAME" >
               <ul class="cate_detail">
                 <li v-for='(item,index) in cateList' :key='index'>
                   <van-col span="8">
@@ -28,7 +20,7 @@
                   </van-col>
                   <van-col span="16">
                     <p class="title">{{item.NAME}}</p>
-                    <p class="price">￥{{item.ORI_PRICE|toMoney }}元</p>
+                    <p class="price">￥<span>{{item.ORI_PRICE|toMoney }}</span> 元</p>
                   </van-col>
                 </li>
               </ul>
@@ -57,6 +49,7 @@ export default {
       finished: false,
       selectedCate: {},
       cateList: [],
+      cateTabFrist:[],
       page: 1
     };
   },
@@ -69,6 +62,9 @@ export default {
     this.$store.dispatch("getGoodsCategoriesFn");
     this.getCategoriesChild(1)
   },
+  mounted(){
+  
+  },
   methods: {
     backFn() {
       this.$router.back();
@@ -78,8 +74,11 @@ export default {
       getCategoriesChildApi(id).then(res => {
         if (res.data.code == 200) {
           this.categoriesChild = res.data.data;
+          // 大类切换，自动加载第一个tab里的数据
+          this.changeList(res.data.data[0].ID);  
         }
       });
+      
     },
     changeTab(index, title) {
         let _this = this;
@@ -99,11 +98,10 @@ export default {
         getCategoriesListApi(param).then(res=>{
            if(res.data.code == 200){
                _this.cateList = res.data.data;
-               debugger
            }
         })
     }
-  }
+  },
 };
 </script>
 <style >
@@ -118,7 +116,8 @@ export default {
     padding-top: 45px;
     height: 100%;
     .cate_big {
-      height: 40rem;
+   
+      height: 100%;
       background-color: aliceblue;
       li {
         padding: 0.55rem 0;
@@ -130,6 +129,7 @@ export default {
       }
     }
     .cate_detail {
+         margin-bottom: 2.8rem;
       li {
         display: flex;
         // height: 5rem;
@@ -138,17 +138,23 @@ export default {
         img {
           margin-top: 0.5rem;
           margin-left: 0.5rem;
-          height: 5rem;
+          height: 4rem;
         }
         p {
           line-height: 1rem;
+          padding-left: 0.4rem;
         }
         p.title {
-          font-size: 0.9rem;
-          color: #333;
+            font-size: 0.7rem;
+            color: #333;
+            font-weight: 500;
+            width: 8rem;
         }
         p.price {
-          font-size: 0.8rem;
+          font-size: 0.68rem;
+          span{
+            color:rgb(255, 94, 0);
+          }
         }
       }
     }

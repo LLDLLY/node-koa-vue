@@ -59,10 +59,10 @@
     <div class="recommend-title">热卖商品</div>
     <div class="hot-goods">
       <ul>
-        <li v-for="(item,index) in homeData.hotGoods" :key="index">
-          <img :src="item.image" alt>
-          <p class="hot-title">{{item.name}}</p>
-          <p class="hot-price">￥{{item.price | toMoney}}({{item.mallPrice | toMoney}})</p>
+        <li v-for="(item,index) in homeData.hotGoods" :key="index" @click="goGoodsInfo(item.goodsId)"  >
+             <img :src="item.image" alt>
+              <p class="hot-title">{{item.name}}</p>
+              <p class="hot-price">￥{{item.price | toMoney}}({{item.mallPrice | toMoney}})</p>
         </li>
       </ul>
     </div>
@@ -143,6 +143,14 @@ export default {
 }
 </style>
 <style lang="less" scoped>
+#ShoppingMall{
+  margin-bottom: 2.5rem;
+}
+.search-input{
+  .van-search--show-action{
+    height: 100%;
+  }
+}
 .search-top {
   height: 2.2rem;
   background-color: #e5017d;
