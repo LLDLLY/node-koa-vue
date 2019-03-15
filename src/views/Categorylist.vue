@@ -62,9 +62,6 @@ export default {
     this.$store.dispatch("getGoodsCategoriesFn");
     this.getCategoriesChild(1)
   },
-  mounted(){
-  
-  },
   methods: {
     backFn() {
       this.$router.back();
@@ -139,6 +136,7 @@ export default {
           margin-top: 0.5rem;
           margin-left: 0.5rem;
           height: 4rem;
+          width: 4rem;
         }
         p {
           line-height: 1rem;

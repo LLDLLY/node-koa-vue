@@ -1,11 +1,11 @@
 <template>
   <div id="app">
     <div>
-      <keep-alive exclude="Goods,Cart">
+      <keep-alive exclude="Goods,Cart,Center">
         <router-view></router-view>
       </keep-alive>
     </div>
-    <van-tabbar v-model="active" @change="changeTabbar(active)" v-if="show">
+    <van-tabbar v-model="active" @change="changeTabbar(active)" v-if="this.$store.state.common.show">
       <van-tabbar-item icon="shop">
         首页
       </van-tabbar-item>
@@ -30,14 +30,13 @@ export default {
     return {
       active: 0,
       path: '',  // 当前路径
-      show: true
     }
   },
   computed: {
     ...mapState(['cartInfo'])
   },
   created () {
-    this.changeTabBarActive()
+    this.changeTabBarActive();
   },
   updated () {
     this.changeTabBarActive()
@@ -61,7 +60,7 @@ export default {
         case '/cart':
           this.active = 2;
           break;
-        case '/member':
+        case '/center':
           this.active = 3;
           break;
         default:
@@ -77,19 +76,15 @@ export default {
           this.$router.push('/categorylist');
           break
         case 2:
-          if (localStorage.name) {
-            this.$router.push('/cart');
-          } else {
-            Toast('请先登录')
-            this.active = 3;
-            this.$router.push('/member');
-          }
+          this.$router.push('/cart');
           break
         case 3:
-          this.$router.push('/member');
+          this.$router.push('/center');
           break
       }
     }
+  },
+  watch:{
   }
 }
 </script>

@@ -2,7 +2,7 @@ import axios from 'axios'
 // axios 配置
 axios.defaults.timeout = 50000;
 
-axios.defaults.baseURL = 'http://localhost:3001/api/v1';
+axios.defaults.baseURL = 'http://172.17.5.99:3001/api/v1';
 
 // axios.defaults.headers.common['sessionid'] = getCookie('token');
 // http response 拦截器

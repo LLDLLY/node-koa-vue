@@ -10,41 +10,28 @@ const router = new Router({
 })
 
 /**
- * home 页面数据
+ * home页面数据
  */
 router.get('/home',HomeController.getHomeInitData)
 
 /**
  * 用户接口
  */
-// 用户注册
-// router.get('/user/register', UserController.create);
-// // 用户登录
-// router.post('/user/login', UserController.login);
-// // 删除用户
-// router.delete('/user/delete/:id', UserController.delete);
-// // 获取用户信息
-// router.get('/user/info', UserController.getUserInfo);
-// // 获取用户列表
-// router.get('/user/list', UserController.getUserList);
+router.post('/user/register', UserController.create);
+router.post('/user/login', UserController.login);
+router.get('/user/info', UserController.getUserInfo);
+router.get('/user/list', UserController.getUserList);
+router.delete('/user/delete/:id', UserController.delete);
 
-
-/**
- * 商品接口
- */
-router.get('/goods/getGoodsDetail',GoodsController.getGoodsDetail)
-
-/**
- * 商品评论
- */
-router.get('/goods/commentsList',GoodsController.getCommentsList)
 
 /** 
- * 商品分类
+ * 商品接口
  */
-router.get('/goods/getCategories',GoodsController.getCategories);
-router.get('/goods/getCategoriesChild',GoodsController.getCategoriesChild);
-router.post('/goods/getCategoriesChildList',GoodsController.getCategoriesChildList);
+router.get('/goods/getGoodsDetail', GoodsController.getGoodsDetail)
+router.get('/goods/commentsList', GoodsController.getCommentsList)
+router.get('/goods/getCategories', GoodsController.getCategories);
+router.get('/goods/getCategoriesChild', GoodsController.getCategoriesChild);
+router.post('/goods/getCategoriesChildList', GoodsController.getCategoriesChildList);
 
 
 module.exports = router

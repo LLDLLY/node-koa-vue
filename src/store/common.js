@@ -1,7 +1,9 @@
 import * as api from '../service/api'
 import { Toast } from 'vant';
+import { promises } from 'fs';
 
 const state = {
+  show:true,
   homeData: {},
   goodsDetail:{},
   goodsComments:{},
@@ -9,6 +11,9 @@ const state = {
 }
 
 const mutations = {
+  changeShow(state, data) {
+    state.show = data
+  },
   getHomeData(state, data) {
     state.homeData = data
   },
@@ -57,6 +62,16 @@ const actions = {
        Toast("服务器繁忙，请稍后重试");
     }
   },
+ userRegisterFn({commit},data){
+    return new Promise((resolve,reject)=>{
+      api.userRegisterApi(data).then(res=>{
+        resolve(res);
+      },(error)=>{
+        reject(error);
+      })
+    });
+  },
+
 
 }
 const getters={

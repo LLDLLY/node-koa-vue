@@ -12,7 +12,7 @@
       <van-tab title="商品详情">
         <div class="detail" v-html="goodsDetail.DETAIL"></div>
       </van-tab>
-      <van-tab title="评论" @click='()=>{alert(66)}'>
+      <van-tab title="评论">
         <ul>
           <li class="rating-item van-hairline--bottom" v-for="(item,index) in goodsComments" :key='index'>
             <div class="avatar">
@@ -58,7 +58,7 @@ export default {
     })
   },
   created() {
-     window.scrollTo(0, 0);
+    window.scrollTo(0, 0);
     this.$store.dispatch("getGoodsDetailFn", this.id);
     this.$store.dispatch("getGoodsCommentsFn", this.id);
   },
@@ -83,10 +83,10 @@ alert(1)
 <style scoped lang='less'>
 h1.name {
   padding-left: 0.5rem;
-  font-size: 0.6rem;
+  font-size: 0.8rem;
 }
 .text {
-  font-size: 0.5rem;
+  font-size: 0.68rem;
   color: #555;
   padding-left: 10px;
 }

@@ -1,5 +1,7 @@
 
 
+
+const mongoose = require('mongoose')
 class UserController {
     /**
      * 创建用户
@@ -8,7 +10,25 @@ class UserController {
      */
     static async create(ctx) {
         const user = ctx.request.body;
-        ctx.body = 'test'
+        // 生成mongooes model
+        const User = mongoose.model('User');
+
+        if(user.username&&user.password){
+            // 查询账号是否存在
+            const existUser = await User.find({'userName':user.username})
+            
+            if(existUser.length > 0){
+                ctx.body={
+                   code:403,
+                   mess:'账户已存在，可直接登录！'
+                }
+            }
+        }
+        // TODO
+    
+        // 2.判断数据合法性，判断账号是否存在
+        // 3.存入数据库
+        // 4.接口response
 
     }
 
