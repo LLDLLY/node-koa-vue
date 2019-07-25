@@ -1,6 +1,5 @@
 import * as api from '../service/api'
 import { Toast } from 'vant';
-import { promises } from 'fs';
 
 const state = {
   show:true,
@@ -71,9 +70,8 @@ const actions = {
       })
     });
   },
-
-
 }
+
 const getters={
   getHomeInitData: state => state.homeData,
   getGoodsDetailGetter:state => state.goodsDetail,

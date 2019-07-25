@@ -14,7 +14,7 @@
           <van-tabs v-model="active" @click="changeTab">
             <van-tab v-for="(item,index) in categoriesChild" :key="index" :title="item.MALL_SUB_NAME" >
               <ul class="cate_detail">
-                <li v-for='(item,index) in cateList' :key='index'>
+                <li v-for='(item,index) in cateList' :key='index' @click="goGoodsInfo(item.ID)">
                   <van-col span="8">
                     <img :src="item.IMAGE1" alt="">
                   </van-col>
@@ -97,6 +97,14 @@ export default {
                _this.cateList = res.data.data;
            }
         })
+    },
+    goGoodsInfo(goodsId){
+      this.$router.push({
+        path: "/goods",
+        query: {
+          goodsId
+        }
+      });
     }
   },
 };

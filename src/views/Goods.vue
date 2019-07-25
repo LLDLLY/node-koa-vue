@@ -67,10 +67,10 @@ export default {
       this.$router.back();
     },
     toCar() {
-alert(1)
+      alert(1)  
     },
     toPay(){
-alert(1)
+      alert(1)
     }
   }
 };
@@ -124,12 +124,12 @@ h1.name {
   padding: 5px;
   width:100%;
   position: fixed;
-  bottom: 2.5rem;
+  bottom: 0rem;
   text-align: center;
   box-sizing: border-box;
-  button{
+  button {
     width: 47%;
-    margin: 0 2.5px ;
+    margin: 0 2px;
   }
 } 
 </style>
