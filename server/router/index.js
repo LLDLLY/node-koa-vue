@@ -33,8 +33,8 @@ router.delete('/user/delete/:id', UserController.delete);
 /** 
  * 商品接口
  */
-router.get('/goods/getGoodsDetail', GoodsController.getGoodsDetail)
-router.get('/goods/commentsList', GoodsController.getCommentsList)
+router.get('/goods/getGoodsDetail', GoodsController.getGoodsDetail);
+router.get('/goods/commentsList', GoodsController.getCommentsList);
 router.get('/goods/getCategories', GoodsController.getCategories);
 router.get('/goods/getCategoriesChild', GoodsController.getCategoriesChild);
 router.post('/goods/getCategoriesChildList', GoodsController.getCategoriesChildList);

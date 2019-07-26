@@ -67,10 +67,10 @@ export default {
       this.$router.back();
     },
     toCar() {
-      alert(1)  
+      alert('加入购物车');  
     },
     toPay(){
-      alert(1)
+      alert('直接购买');
     }
   }
 };

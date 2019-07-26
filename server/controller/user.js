@@ -1,27 +1,42 @@
-
-
-
 const mongoose = require('mongoose')
+
 class UserController {
+
     /**
      * 创建用户
-     * @param ctx
-     * @returns {Promise<void>}
      */
     static async create(ctx) {
-        const user = ctx.request.body;
+        const requestParams = ctx.request.body;
         // 生成mongooes model
-        const User = mongoose.model('User');
+        const UserMongo = mongoose.model('User');
 
-        if(user.username&&user.password){
+        UserController.verifyUser(requestParams);
+
+        if(requestParams.username&&requestParams.password){
+         
             // 查询账号是否存在
-            const existUser = await User.find({'userName':user.username})
-            
+            const existUser = await UserMongo.find({'userName': requestParams.username});
             if(existUser.length > 0){
-                ctx.body={
-                   code:403,
-                   mess:'账户已存在，可直接登录！'
+                console.log('存在');
+                ctx.body = {
+                   code: 403,
+                   mess: '账户已存在，可直接登录！'
                 }
+            }else{
+                console.log('不存在')
+                let newUser = new UserMongo(requestParams);
+
+                newUser.save().then(() => {
+                    ctx.body = {
+                    code: 200,
+                    message: '注册成功'
+                    }
+                }).catch(e => {
+                    ctx.body = {
+                    code: 500,
+                    message: e  
+                    }
+                }) 
             }
         }
         // TODO
@@ -30,6 +45,19 @@ class UserController {
         // 3.存入数据库
         // 4.接口response
 
+    }
+
+    /**
+     * 验证用户参数
+     */
+    static verifyUser(params){
+        if(!params.username||!params.password){
+            ctx.body = {
+            code: 500,
+            message: '用户名或者密码不能为空！'
+            }
+            return;
+        }
     }
 
     /**
