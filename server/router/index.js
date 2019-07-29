@@ -39,4 +39,4 @@ router.get('/goods/getCategories', GoodsController.getCategories);
 router.get('/goods/getCategoriesChild', GoodsController.getCategoriesChild);
 router.post('/goods/getCategoriesChildList', GoodsController.getCategoriesChildList);
 
-module.exports = router
+module.exports = router;

@@ -31,4 +31,8 @@ export function userRegisterApi(data) {
     return axios.post(`/user/register`,{...data});
 }
 
+export function userLoginApi(data) {
+    return axios.post(`/user/login`,{...data});
+}
+
 

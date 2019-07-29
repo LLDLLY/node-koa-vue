@@ -7,8 +7,8 @@ const SALT_WORK_FACTOR = 10;
 
 // 创建UserSchema
 const userSchema = new Schema({
-    userId: {type: ObjectId},
-    userName: {unique: true, type: String},
+    // userId: {unique: true, type: String},
+    username: {unique: true,type: String},
     password: {type: String},
     createAt: {type: Date, default: Date.now()},
     lastLoginAt: {type: Date, default: Date.now()}

@@ -57,44 +57,29 @@
         this.$router.back()
       },
       login () {
-        this.checkForm() && this.loginUser()
+        this.checkForm() && this.loginUser();
       }, 
       loginUser () {
         this.openLoading = true
-        // axios.post(url.loginUser, {
-        //   userName: this.username,
-        //   password: this.password
-        // }).then(res => {
-        //   if (res.data.code === 200 && res.data.message) {
-        //     // 存储登录状态
-        //     localStorage.name = this.username
-        //     Toast.success('登录成功')
-        //     this.$router.push('/')
-        //     this.openLoading = false
-        //   } else {
-        //     Toast.fail('用户名或密码错误')
-        //     this.openLoading = false
-        //   }
-        // }).catch((e) => {
-        //   Toast.fail('登录失败')
-        //   this.openLoading = false
-        // })
+        this.$store.dispatch('userLoginFn',{username:this.username,password:this.password}).then(res=>{
+          console.log('前端接收到数据')
+        })
       },
       checkForm () {
-        let isOK = true
-        if (this.username.length < 5) {
-          this.usernameErrorMsg = "用户名不能少于5位"
-          isOK = false
+        let isOK = true;
+        if (this.username.length < 3) {
+          this.usernameErrorMsg = "用户名不能少于3位";
+          isOK = false;
         } else {
-          this.usernameErrorMsg = ''
+          this.usernameErrorMsg = '';
         }
         if (this.password.length < 6) {
-          this.passwordErrorMsg = "密码不能少于6位"
-          isOK = false
+          this.passwordErrorMsg = "密码不能少于6位";
+          isOK = false;
         } else {
-          this.passwordErrorMsg = ''
+          this.passwordErrorMsg = '';
         }
-        return isOK
+        return isOK;
       }
     }
   }
@@ -102,7 +87,6 @@
 
 <style lang='less' scoped>
   .toregister{
-
     font-size: 0.7rem;
     text-align: right;
     padding-right:0.5rem ;

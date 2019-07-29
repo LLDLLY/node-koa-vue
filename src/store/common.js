@@ -60,16 +60,7 @@ const actions = {
     }else {
        Toast("服务器繁忙，请稍后重试");
     }
-  },
- userRegisterFn({commit},data){
-    return new Promise((resolve,reject)=>{
-      api.userRegisterApi(data).then(res=>{
-        resolve(res);
-      },(error)=>{
-        reject(error);
-      })
-    });
-  },
+  }
 }
 
 const getters={
