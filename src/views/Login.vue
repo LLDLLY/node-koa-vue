@@ -27,8 +27,7 @@
     </div>
     <div class="toregister"><router-link to="/register">没有账号？去注册</router-link></div>
     <div class="login-button">
-      <van-button type="primary" size="large" @click="login" 
-      :loading="openLoading">登录</van-button>
+      <van-button type="primary" size="large" @click="login" :loading="openLoading">登录</van-button>
     </div>
   </div>
 </template>
@@ -54,15 +53,20 @@
     },
     methods: {
       goBack () {
-        this.$router.back()
+        this.$router.back();
       },
       login () {
         this.checkForm() && this.loginUser();
       }, 
       loginUser () {
-        this.openLoading = true
-        this.$store.dispatch('userLoginFn',{username:this.username,password:this.password}).then(res=>{
-          console.log('前端接收到数据')
+        this.openLoading = true;
+        this.$store.dispatch('userLoginFn',{username:this.username,password:this.password}).then(data=>{
+          console.log('前端接收到数据');
+           this.openLoading = false;
+          // let res = data.data
+          if(res.success){
+            // todo 登录
+          }
         })
       },
       checkForm () {

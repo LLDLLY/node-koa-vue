@@ -1,17 +1,18 @@
 import * as api from '../service/api'
 import { Toast } from 'vant';
+import Cookies from "js-cookie";
 
 const state = {
     show: true,
-    userData: {}
+    userToken: ''
 }
 
 const mutations = {
     changeShow(state, data) {
         state.show = data
     },
-    setUserData(state, data) {
-        state.userData = data
+    setUserToken(state, data) {
+        state.userToken = data
     },
 }
 
@@ -35,18 +36,19 @@ const actions = {
         });
     },
     async userLoginFn({ commit }, data) {
-        let res = await api.userLoginApi(data);
-        if (res.data.code == 200) {
-            console.log(res.data)
-            commit('setUserData', res.data.data);
+        let callData = await api.userLoginApi(data);
+        let res = callData.data;
+        if (res.success) {
+            commit('setUserToken', res.token);
+            Cookies.set('token', res.token, { expires: 0.5 * 60 * 60 * 1000 })
         } else {
-            Toast("服务器繁忙，请稍后重试");
+            Toast(res.mess);
         }
     }
 }
 
 const getters = {
-    getUserData: state => state.userData,
+    getToken: state => state.userToken,
 
 }
 

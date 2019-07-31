@@ -1,17 +1,16 @@
-const mongoose = require('mongoose') ;
-const db = 'mongodb://localhost/vue-mall';
+const mongoose = require('mongoose');
+const { dbName, host } = require('../config/config').database;
+const db = `mongodb://${host}/${dbName}`;
 const glob = require('glob');
-const {resolve} = require('path');
-
+const { resolve } = require('path');
 
 exports.initSchemas = () => {
   glob.sync(resolve(__dirname, './schema', '**/*.js')).forEach(require);
 }
 
-
 exports.connect = () => {
   // 连接数据库
-  mongoose.connect(db,{ useNewUrlParser: true });
+  mongoose.connect(db, { useNewUrlParser: true });
 
   let maxConnectTimes = 0;
 
@@ -24,7 +23,7 @@ exports.connect = () => {
       return
     }
     throw new Error('db error');
-  }) 
+  })
 
   mongoose.connection.on('error', (err) => {
     if (maxConnectTimes <= 3) {

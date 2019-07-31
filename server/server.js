@@ -1,10 +1,9 @@
 const Koa = require('koa');
 const app = new Koa();
-const logger = require('koa-logger');
-const bodyParser = require('koa-bodyparser');
 const cors = require('koa2-cors');
-const Router = require('koa-router');
+const logger = require('koa-logger');
 const index = require('./router/index');
+const bodyParser = require('koa-bodyparser');
 const {connect,initSchemas } = require('./database/init');
 
 app.use(logger());

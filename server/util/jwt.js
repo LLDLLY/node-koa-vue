@@ -1,3 +1,6 @@
+/**
+ * jwt 用法 demo 
+ */
 const jwt = require('jsonwebtoken')
 const fs = require('fs')
 
@@ -19,15 +22,14 @@ const secret = 'KSJINAINAINUWOWNANMJ';
 const token = jwt.sign(payload, secret, { expiresIn: '1day' })
 
 // 输出签发的 Token
-console.log('HS256 算法：', token)
+console.log('HS256 算法：', token);
 
 // 验证 Token
 jwt.verify(token, secret, (error, decoded) => {
   if (error) {
-    console.log(error.message)
+    console.log(error.message);
     return
   }
-  console.log(decoded)
+  console.log(decoded);
 })
 
-console.log('\n')
