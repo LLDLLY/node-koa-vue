@@ -1,11 +1,12 @@
 module.exports = {
     environment: 'dev',
+    // 需要自己搭建一下mongodb数据库，填上自己数据库的参数
     database: {
-        dbName: 'vue-mall',
-        host: 'localhost',
-        port: 3306,
-        user: 'root',
-        password: 'password'
+        dbName: 'test',
+        host: '*.*.*.*',
+        port: 0000,
+        user: 'admin',
+        password: '123456',
     },
     security: {
         secretKey: "secretKey",
@@ -13,3 +14,4 @@ module.exports = {
         expiresIn: 60 * 60
     }
 }
+

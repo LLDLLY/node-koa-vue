@@ -1,6 +1,7 @@
+/* eslint-disable prettier/prettier */
 const mongoose = require('mongoose');
-const { dbName, host } = require('../config/config').database;
-const db = `mongodb://${host}/${dbName}`;
+const { dbName, host, port, user, password } = require('../config/config').database;
+const db = `mongodb://${user}:${password}@${host}:${port}/${dbName}?authSource=${dbName}`;
 const glob = require('glob');
 const { resolve } = require('path');
 
@@ -13,7 +14,6 @@ exports.connect = () => {
   mongoose.connect(db, { useNewUrlParser: true });
 
   let maxConnectTimes = 0;
-
   //监听事件
   mongoose.connection.on('disconnected', () => {
     console.log('disconnected');
@@ -31,7 +31,7 @@ exports.connect = () => {
       mongoose.connect(db);
       return
     }
-    throw new Error('db error');
+    throw new Error('db error:' + err);
   })
 
   mongoose.connection.on('connected', () => {

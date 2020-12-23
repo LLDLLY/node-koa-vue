@@ -10,10 +10,11 @@ class InsertController {
     static async insertComments(ctx) {
         fs.readFile(resolve(__dirname, '../json/mongo_json/newcomments.json'), 'utf8', (err, data) => {
             if (err) throw err
+            ctx.body = { err: err }
             if (!data) return;
             const Comments = mongoose.model('Comments');
             let saveCount = 0;
-            JSON.parse(data).map(item => {
+            JSON.parse(data).forEach(item => {
                 let newComments = new Comments(item);
                 newComments.save().then(() => {
                     saveCount++;
@@ -22,18 +23,23 @@ class InsertController {
                     throw err;
                 })
             })
-            console.log("导入评论成功");
-            ctx.body = { code: 200 }
         })
+        ctx.body = {
+            code: 200,
+            mess: '导入评论成功'
+        }
     }
 
     static async insertAllGoodsInfo(ctx, next) {
         fs.readFile(resolve(__dirname, '../json/mongo_json/newGoods.json'), 'utf8', (err, data) => {
-            if (err) throw err
+            if (err) {
+                throw err;
+            }
             data = JSON.parse(data)
             let saveCount = 0
             const Goods = mongoose.model('Goods')
-            data.map(item => {
+
+            data.forEach(item => {
                 let newGoods = new Goods(item)
                 newGoods.save().then(() => {
                     saveCount++
@@ -42,18 +48,21 @@ class InsertController {
                     throw err
                 })
             })
+
         })
-        console.log("导入商品成功")
-        ctx.body = { code: 200 }
+        ctx.body = {
+            code: 200,
+            mess: '导入商品成功'
+        }
     }
 
     static async insertAllCategory(ctx, next) {
-        fs.readFile( resolve(__dirname,'../json/mongo_json/category.json'), 'utf8', (err, data) => {
+        fs.readFile(resolve(__dirname, '../json/mongo_json/category.json'), 'utf8', (err, data) => {
             if (err) throw err;
             data = JSON.parse(data);
             let saveCount = 0;
             const Category = mongoose.model('Categories');
-            data.RECORDS.map(item => {
+            data.RECORDS.forEach(item => {
                 let newCategory = new Category(item);
                 newCategory.save().then(() => {
                     saveCount++;
@@ -63,17 +72,19 @@ class InsertController {
                 })
             })
         })
-        console.log("导入分类成功")
-        ctx.body = { code: 200 }
+        ctx.body = {
+            code: 200,
+            mess: '导入分类成功'
+        }
     }
 
     static async insertAllCategorySub(ctx, next) {
-        fs.readFile(resolve(__dirname,'../json/mongo_json/category_sub.json'), 'utf8', (err, data) => {
+        fs.readFile(resolve(__dirname, '../json/mongo_json/category_sub.json'), 'utf8', (err, data) => {
             if (err) throw err
             data = JSON.parse(data)
             let saveCount = 0
             const CategorySub = mongoose.model('CategorySub')
-            data.RECORDS.map(item => {
+            data.RECORDS.forEach(item => {
                 let newCategory = new CategorySub(item)
                 newCategory.save().then(() => {
                     saveCount++
@@ -83,8 +94,10 @@ class InsertController {
                 })
             })
         })
-        console.log("导入子分类成功")
-        ctx.body = { code: 200 }
+        ctx.body = {
+            code: 200,
+            mess: '导入子分类成功'
+        }
     }
 
 

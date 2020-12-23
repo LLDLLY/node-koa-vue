@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 const jwt = require('jsonwebtoken')
 const secret = require('../json/secret.json')
 const util = require('util')
@@ -31,7 +32,7 @@ module.exports = function () {
                 ctx.status = 401;
                 ctx.body = statusCode.ERROR_401('Unauthorized，请求需要用户的身份认证！');
             } else {
-                ctx.body = statusCode.ERROR_404({err});
+                ctx.body = statusCode.ERROR_404({ err });
             }
         }
     }

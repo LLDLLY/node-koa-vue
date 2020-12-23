@@ -26,6 +26,7 @@ userSchema.pre('save', function (next) {
     })
   })
 })
+
 // 密码比对
 userSchema.methods = {
   comparePassword: (_password, password) => {
