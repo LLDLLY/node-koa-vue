@@ -53,12 +53,7 @@ export default {
       passwordErrorMsg: "", // 当密码出现错误时的提示
     };
   },
-  created() {
-    // if (localStorage.name) {
-    //   Toast.success('您已经登录')
-    //   this.$router.push('/')
-    // }
-  },
+  created() {},
   methods: {
     goBack() {
       this.$router.back();
