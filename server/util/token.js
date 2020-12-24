@@ -1,10 +1,7 @@
-/**
- * jwt 用法 demo 
- */
 const jwt = require('jsonwebtoken')
 const { TOKEN } = require('../config/config')
 
-export default {
+module.exports = {
   /**
    * 生成token
    * @param {*} params 用户信息
