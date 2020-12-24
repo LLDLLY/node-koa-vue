@@ -13,7 +13,8 @@ module.exports = {
         EXPIRESIN: 60 * 60,
     },
     TOKEN: {
-        TOKEN_ENCODE_STR: 'sdfsfljsndfkjshdkfnsdlolkljks'
+        TOKEN_ENCODE_STR: 'ksdIBNKJNKJNjksnfksjdnljkjKJHBJsdsd',
+        TOKEN_EXPIRES: '1day'
     }
 }
 

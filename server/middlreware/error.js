@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 const jwt = require('jsonwebtoken')
 const secret = require('../json/secret.json')
 const util = require('util')
