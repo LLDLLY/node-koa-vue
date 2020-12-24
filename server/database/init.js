@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 const mongoose = require('mongoose');
-const { dbName, host, port, user, password } = require('../config/config').database;
-const db = `mongodb://${user}:${password}@${host}:${port}/${dbName}?authSource=${dbName}`;
+const { DB_NAME, DB_HOST, DB_PORT, DB_USER_NAME, DB_USER_PASSWORD } = require('../config/config').DATABASE;
+const db = `mongodb://${DB_USER_NAME}:${DB_USER_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}?authSource=${DB_NAME}`;
 const glob = require('glob');
 const { resolve } = require('path');
 

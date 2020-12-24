@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken')
 const secret = 'KSJINAINAINUWOWNANMJ';
 
 class UserController {
-    constructor() {}
+    constructor() { }
     /**
      * 验证用户参数是否为空
      */
@@ -32,12 +32,13 @@ class UserController {
         if (username && password) {
 
             // 查询账号是否存在
-            const existUser = await UserMongo.findOne({ 'username': requestParams.username });
+            const existUser = await UserMongo.findOne({ 'username': username });
 
-            // status:'0' 账户已存在 status:'1' 注册成功
+            // status:'0' 账户已存在 
+            // status:'1' 注册成功
             if (!!existUser) {
                 console.log('存在');
-                ctx.body = { success: false, mess: '账户已存在，可直接登录！', status: '0' };
+                ctx.body = { code: 200, success: false, mess: '账户已存在，请直接登录！', status: '0' };
             } else {
                 console.log('不存在')
                 let newUser = new UserMongo(requestParams);
@@ -45,19 +46,10 @@ class UserController {
                 const res = await newUser.save();
 
                 if (!res.errors) {
-                    ctx.body = { success: true, mess: '注册成功!', status: '1' }
+                    ctx.body = { code: 200, success: true, mess: '注册成功!', status: '1' }
                 } else {
-                    ctx.body = result;
+                    ctx.body = { code: 200, success: false, mess: '注册失败!', status: '0', error: res.errors };
                 }
-
-                // 下面代码执行时，会直接先跳过save的回掉处理，路由返回404，再执行err回掉，原因暂不清楚
-                // await newUser.save(err => {
-                //     if (err) {
-                //         ctx.body = result;
-                //     } else {
-                //         ctx.body = {success: true, message: '注册成功'}
-                //     }
-                // })
             }
         }
     }
@@ -83,19 +75,19 @@ class UserController {
                 console.log('存在');
 
                 // 判断用户是否登录过
-                if (existUser.token) { 
+                if (existUser.token) {
                     // invalid token 是否过期
-                   jwt.verify(existUser.token, secret,(err,res)=>{
-                        if(err){
-                            console.log('err',err)
+                    jwt.verify(existUser.token, secret, (err, res) => {
+                        if (err) {
+                            console.log('err', err)
                             ctx.body = { code: 200, success: false, mess: 'token失效' };
                             UserController.setTokenFn(ctx);
                             return;
                         }
                         ctx.body = { code: 200, success: false, mess: '请勿重新登录' };
                     });
-                   
-                  
+
+
                 } else {
                     UserController.setTokenFn(ctx);
                 }
@@ -106,7 +98,7 @@ class UserController {
     /**
      * 用户签发token逻辑
      */
-    static async setTokenFn(ctx){
+    static async setTokenFn(ctx) {
         // 对比密码是否正确
         const userData = new UserMongo();
         let data = await userData.comparePassword(password, existUser.password);
@@ -118,7 +110,7 @@ class UserController {
 
         // jwt签发token
         var token = jwt.sign({ username: username, _id: existUser._id }, secret, {
-            expiresIn:1000  // token 过期销毁时间设置
+            expiresIn: 1000  // token 过期销毁时间设置
         });
 
         UserMongo.updateOne({ '_id': existUser._id }, { 'token': token, 'updateTime': new Date() }, (err, res) => {

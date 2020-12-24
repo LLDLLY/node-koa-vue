@@ -1,17 +1,19 @@
 module.exports = {
-    environment: 'dev',
-    // 需要自己搭建一下mongodb数据库，填上自己数据库的参数
-    database: {
-        dbName: 'test',
-        host: '*.*.*.*',
-        port: 0000,
-        user: 'admin',
-        password: '123456',
+    ENV: 'dev',
+    DATABASE: {
+        DB_NAME: '****',
+        DB_HOST: '0.0.0.0',
+        DB_PORT: 27017,
+        DB_USER_NAME: '**',
+        DB_USER_PASSWORD: '*****',
     },
-    security: {
-        secretKey: "secretKey",
+    SECURITY: {
+        SECRET_KEY: "secretKey",
         // 过期时间 1小时
-        expiresIn: 60 * 60
+        EXPIRESIN: 60 * 60,
+    },
+    TOKEN: {
+        TOKEN_ENCODE_STR: 'sdfsfljsndfkjshdkfnsdlolkljks'
     }
 }
 
