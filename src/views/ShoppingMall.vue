@@ -1,31 +1,33 @@
 <template>
   <div id="ShoppingMall">
-    <van-row class="search-top" type="flex" justify="space-between">
-      <van-col span="4">
-        <!-- 定位icon -->
-        <img
-          @click="selectCity"
-          class="location-icon"
-          :src="locationIcon"
-          alt
-          width="35%"
-        />
-        <span class="city">{{ city }}</span>
-      </van-col>
-      <!-- 搜索 -->
-      <van-col span="20">
-        <div class="search-input">
-          <van-search
-            shape="round"
-            placeholder="请输入搜索关键词"
-            @cancel="onCancel"
-            v-model="search"
-            background="#e5017d"
-            show-action
+    <van-sticky>
+      <van-row class="search-top" type="flex" justify="space-between">
+        <van-col span="4">
+          <!-- 定位icon -->
+          <img
+            @click="selectCity"
+            class="location-icon"
+            :src="locationIcon"
+            alt
+            width="35%"
           />
-        </div>
-      </van-col>
-    </van-row>
+          <span class="city">{{ city }}</span>
+        </van-col>
+        <!-- 搜索 -->
+        <van-col span="20">
+          <div class="search-input">
+            <van-search
+              shape="round"
+              placeholder="请输入搜索关键词"
+              @cancel="onCancel"
+              v-model="search"
+              background="#e5017d"
+              show-action
+            />
+          </div>
+        </van-col>
+      </van-row>
+    </van-sticky>
     <!-- 滚动提示 -->
     <van-notice-bar mode="closeable">
       商城开业大酬宾，线上线下全部5折，全部5折!!!
@@ -178,7 +180,7 @@ export default {
 </style>
 <style lang="less" scoped>
 #ShoppingMall {
-  margin-bottom: 2.5rem;
+  padding-bottom: 4.5rem;
 }
 .search-input {
   .van-search--show-action {
