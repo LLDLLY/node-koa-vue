@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const jwt = require('jsonwebtoken')
-const secret = 'KSJINAINAINUWOWNANMJ';
+const { create_token, decode_token } = require('../util/token')
 
 class UserController {
     constructor() { }
@@ -65,64 +65,80 @@ class UserController {
         UserController.verifyUser({ username, password });
         if (username && password) {
             const UserMongo = mongoose.model('User');
+            const userData = new UserMongo()
             // 查询账号是否存在
             const existUser = await UserMongo.findOne({ 'username': username });
 
             if (!existUser) {
                 console.log('不存在');
                 ctx.body = { code: 200, success: false, mess: "账号不存在，请确认账号！" };
+                return
+            }
+            console.log('存在');
+            // 密码是否正确
+            let data = await userData.comparePassword(password, existUser.password);
+            if (!data) {
+                console.log('comparePassword:', data)
+                ctx.body = { code: 200, success: false, mess: '密码错误,请检查账号和密码是否正确！' };
+                return
+            }
+
+            // 判断用户是否登录过 TODO
+            if (existUser.token) {
+                // invalid token 是否过期
+                try {
+                    const decodeRes = await decode_token(existUser.token)
+                    console.log('decodeRes:', decodeRes)
+                    if (!!decodeRes) ctx.body = { code: 200, success: false, mess: '请勿重复登录!' };
+                } catch (err) {
+                    ctx.body = { code: 5001, success: false, mess: 'token失效,请重新登录！' };
+                }
             } else {
-                console.log('存在');
-
-                // 判断用户是否登录过
-                if (existUser.token) {
-                    // invalid token 是否过期
-                    jwt.verify(existUser.token, secret, (err, res) => {
-                        if (err) {
-                            console.log('err', err)
-                            ctx.body = { code: 200, success: false, mess: 'token失效' };
-                            UserController.setTokenFn(ctx);
-                            return;
-                        }
-                        ctx.body = { code: 200, success: false, mess: '请勿重新登录' };
-                    });
-
-
-                } else {
-                    UserController.setTokenFn(ctx);
+                const result = await UserController.setTokenFn(ctx, existUser);
+                console.log('login result:', result)
+                ctx.body = {
+                    code: 200,
+                    success: true,
+                    result: result,
+                    mess: result.mess
                 }
             }
+
         }
     }
 
     /**
      * 用户签发token逻辑
      */
-    static async setTokenFn(ctx) {
+    static setTokenFn(ctx, existUser) {
+        const { username } = ctx.request.body;
         // 对比密码是否正确
-        const userData = new UserMongo();
-        let data = await userData.comparePassword(password, existUser.password);
+        const UserMongo = mongoose.model('User');
 
-        if (!data) {
-            ctx.body = { code: 200, success: false, mess: '密码错误,请检查账号和密码是否正确！' };
-            return;
-        }
+        return new Promise(async (resolve, reject) => {
+            try {
+                // jwt签发token
+                const token = create_token({ username: username, _id: existUser._id })
+                console.log('token', token)
 
-        // jwt签发token
-        var token = jwt.sign({ username: username, _id: existUser._id }, secret, {
-            expiresIn: 1000  // token 过期销毁时间设置
-        });
-
-        UserMongo.updateOne({ '_id': existUser._id }, { 'token': token, 'updateTime': new Date() }, (err, res) => {
-            if (err) {
-                ctx.body = { code: 500, success: false, mess: '数据库操作失败，请联系管理员！' }
-                throw (err);
-            } else {
-                console.log(res);
+                UserMongo.updateOne({ '_id': existUser._id }, { 'token': token, 'updateTime': new Date() }, (err, res) => {
+                    if (err) {
+                        // ctx.body = { code: 500, success: false, mess: '数据库操作失败，请联系管理员！' }
+                        resolve({ status: 0, mess: 'token存数据库失败，请联系管理员！' });
+                    } else {
+                        // console.log('res', res);
+                        resolve({ status: 1, token: token, mess: '登入成功!', });
+                        // ctx.body = { code: 200, success: true, token: token, mess: '登入成功!' };
+                    }
+                });
+            } catch (err) {
+                reject({ status: 0, mess: err })
+                throw (err)
             }
-        });
 
-        if (data) ctx.body = { code: 200, success: true, token: token, mess: '登入成功!' };
+        })
+
+        // if (data) ctx.body = { code: 200, success: true, token: token, mess: '登入成功!' };
     }
 
     /**
