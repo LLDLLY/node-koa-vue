@@ -1,7 +1,8 @@
 <template>
   <div id="ShoppingMall">
     <van-row class="search-top" type="flex" justify="space-between">
-      <van-col span="6">
+      <van-col span="4">
+        <!-- 定位icon -->
         <img
           @click="selectCity"
           class="location-icon"
@@ -11,9 +12,11 @@
         />
         <span class="city">{{ city }}</span>
       </van-col>
-      <van-col span="24">
+      <!-- 搜索 -->
+      <van-col span="20">
         <div class="search-input">
           <van-search
+            shape="round"
             placeholder="请输入搜索关键词"
             @cancel="onCancel"
             v-model="search"
@@ -23,11 +26,14 @@
         </div>
       </van-col>
     </van-row>
-    <van-notice-bar mode="closeable"
-      >商城开业大酬宾，线上线下全部5折，全部5折!!!
-      下单满199元，免费赠送礼品一份，数量有限，送完为止</van-notice-bar
-    >
-    <Banner :imagesList="imagesList"></Banner>
+    <!-- 滚动提示 -->
+    <van-notice-bar mode="closeable">
+      商城开业大酬宾，线上线下全部5折，全部5折!!!
+      下单满199元，免费赠送礼品一份，数量有限，送完为止
+    </van-notice-bar>
+    <!-- banner -->
+    <Banner :imagesList="imagesList" />
+    <!-- 分类 -->
     <div class="Category">
       <ul>
         <li v-for="(item, index) in homeData.category" :key="index">
@@ -44,6 +50,7 @@
         alt
       />
     </div>
+    <!-- 商品推荐 -->
     <p class="recommend-title">商品推荐</p>
     <div class="recommend-body">
       <swiper :options="options">
@@ -58,18 +65,22 @@
         </swiper-slide>
       </swiper>
     </div>
+    <!-- 休闲食物 -->
     <Foods
       :floorTitle="homeData.floorName && homeData.floorName.floor1"
       :floorData="homeData && homeData.floor1"
     ></Foods>
+    <!-- 新鲜水果 -->
     <Foods
       :floorTitle="homeData.floorName && homeData.floorName.floor2"
       :floorData="homeData && homeData.floor2"
     ></Foods>
+    <!-- 营养奶品 -->
     <Foods
       :floorTitle="homeData.floorName && homeData.floorName.floor3"
       :floorData="homeData && homeData.floor3"
     ></Foods>
+    <!-- 热卖商品 -->
     <div class="recommend-title">热卖商品</div>
     <div class="hot-goods">
       <ul>
@@ -161,6 +172,9 @@ export default {
   color: #f60;
   background-color: #fff7cc;
 }
+.van-search--show-action {
+  padding: 0;
+}
 </style>
 <style lang="less" scoped>
 #ShoppingMall {
@@ -173,11 +187,12 @@ export default {
 }
 .search-top {
   height: 2.2rem;
+  align-items: center;
   background-color: #e5017d;
   .location-icon {
-    width: 1.3rem;
-    margin-top: 0.4rem;
-    margin-left: 0.5rem;
+    width: 1.1rem;
+    height: 1rem;
+    margin-left: 0.3rem;
   }
   .city {
     font-size: 0.7rem;
