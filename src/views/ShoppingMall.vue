@@ -2,8 +2,14 @@
   <div id="ShoppingMall">
     <van-row class="search-top" type="flex" justify="space-between">
       <van-col span="6">
-        <img @click="selectCity" class="location-icon" :src="locationIcon" alt width="35%">
-        <span class="city">{{city}}</span>
+        <img
+          @click="selectCity"
+          class="location-icon"
+          :src="locationIcon"
+          alt
+          width="35%"
+        />
+        <span class="city">{{ city }}</span>
       </van-col>
       <van-col span="24">
         <div class="search-input">
@@ -17,52 +23,66 @@
         </div>
       </van-col>
     </van-row>
-    <van-notice-bar mode="closeable">商城开业大酬宾，线上线下全部5折，全部5折!!! 下单满199元，免费赠送礼品一份，数量有限，送完为止</van-notice-bar>
+    <van-notice-bar mode="closeable"
+      >商城开业大酬宾，线上线下全部5折，全部5折!!!
+      下单满199元，免费赠送礼品一份，数量有限，送完为止</van-notice-bar
+    >
     <Banner :imagesList="imagesList"></Banner>
     <div class="Category">
       <ul>
-        <li v-for="(item,index) in homeData.category" :key="index">
-          <img @click="toCategory(item.mallCategoryId)" :src="item.image" alt>
-          <p>{{item.mallCategoryName}}</p>
+        <li v-for="(item, index) in homeData.category" :key="index">
+          <img @click="toCategory(item.mallCategoryId)" :src="item.image" alt />
+          <p>{{ item.mallCategoryName }}</p>
         </li>
       </ul>
     </div>
     <div class="notice">
-      <img :src="homeData.advertesPicture&&homeData.advertesPicture.PICTURE_ADDRESS" alt>
+      <img
+        :src="
+          homeData.advertesPicture && homeData.advertesPicture.PICTURE_ADDRESS
+        "
+        alt
+      />
     </div>
     <p class="recommend-title">商品推荐</p>
     <div class="recommend-body">
       <swiper :options="options">
-        <swiper-slide v-for="(item,key) in  homeData.recommend" :key="key">
+        <swiper-slide v-for="(item, key) in homeData.recommend" :key="key">
           <div class="recommend-item" @click="goGoodsInfo(item.goodsId)">
-            <img :src="item.image" width="80%">
-            <p class="recommend-name">{{item.goodsName}}</p>
-            <p
-              class="recommend-price"
-            >￥{{item.price | toMoney}}(￥{{item.mallPrice | toMoney}})</p>
+            <img :src="item.image" width="80%" />
+            <p class="recommend-name">{{ item.goodsName }}</p>
+            <p class="recommend-price">
+              ￥{{ item.price | toMoney }}(￥{{ item.mallPrice | toMoney }})
+            </p>
           </div>
         </swiper-slide>
       </swiper>
     </div>
     <Foods
-      :floorTitle="homeData.floorName&&homeData.floorName.floor1"
-      :floorData="homeData&&homeData.floor1"
+      :floorTitle="homeData.floorName && homeData.floorName.floor1"
+      :floorData="homeData && homeData.floor1"
     ></Foods>
     <Foods
-      :floorTitle="homeData.floorName&&homeData.floorName.floor2"
-      :floorData="homeData&&homeData.floor2"
+      :floorTitle="homeData.floorName && homeData.floorName.floor2"
+      :floorData="homeData && homeData.floor2"
     ></Foods>
     <Foods
-      :floorTitle="homeData.floorName&&homeData.floorName.floor3"
-      :floorData="homeData&&homeData.floor3"
+      :floorTitle="homeData.floorName && homeData.floorName.floor3"
+      :floorData="homeData && homeData.floor3"
     ></Foods>
     <div class="recommend-title">热卖商品</div>
     <div class="hot-goods">
       <ul>
-        <li v-for="(item,index) in homeData.hotGoods" :key="index" @click="goGoodsInfo(item.goodsId)"  >
-             <img :src="item.image" alt>
-              <p class="hot-title">{{item.name}}</p>
-              <p class="hot-price">￥{{item.price | toMoney}}({{item.mallPrice | toMoney}})</p>
+        <li
+          v-for="(item, index) in homeData.hotGoods"
+          :key="index"
+          @click="goGoodsInfo(item.goodsId)"
+        >
+          <img :src="item.image" alt />
+          <p class="hot-title">{{ item.name }}</p>
+          <p class="hot-price">
+            ￥{{ item.price | toMoney }}({{ item.mallPrice | toMoney }})
+          </p>
         </li>
       </ul>
     </div>
@@ -70,8 +90,8 @@
 </template>
 <script>
 import { mapState, mapActions, mapGetters } from "vuex";
-import Banner from "../components/banner.vue";
-import Foods from "../components/foods.vue";
+import Banner from "./components/banner.vue";
+import Foods from "./components/foods.vue";
 import "swiper/dist/css/swiper.css";
 import { swiper, swiperSlide } from "vue-awesome-swiper";
 export default {
@@ -79,7 +99,7 @@ export default {
     Banner,
     swiper,
     swiperSlide,
-    Foods
+    Foods,
   },
   data() {
     return {
@@ -88,14 +108,14 @@ export default {
       city: "上海",
       imagesList: [],
       options: {
-        slidesPerView: 2.5
-      }
+        slidesPerView: 2.5,
+      },
     };
   },
   computed: {
     ...mapGetters({
-      homeData: "getHomeInitData"
-    })
+      homeData: "getHomeInitData",
+    }),
   },
   created() {
     this.$store.dispatch("getHomeDataFn").then(() => {
@@ -113,20 +133,20 @@ export default {
       this.$router.push({
         path: "/goods",
         query: {
-          goodsId
-        }
+          goodsId,
+        },
       });
     },
     selectCity() {},
     onCancel() {
       this.search = "";
-    }
+    },
   },
   watch: {
     search() {
       // search
-    }
-  }
+    },
+  },
 };
 </script>
 <style>
@@ -143,11 +163,11 @@ export default {
 }
 </style>
 <style lang="less" scoped>
-#ShoppingMall{
+#ShoppingMall {
   margin-bottom: 2.5rem;
 }
-.search-input{
-  .van-search--show-action{
+.search-input {
+  .van-search--show-action {
     height: 100%;
   }
 }

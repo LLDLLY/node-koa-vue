@@ -69,9 +69,9 @@ export default {
           password: this.password,
         })
         .then((data) => {
-          console.log("前端接收到数据");
           this.openLoading = false;
-          // let res = data.data
+          let res = data.data;
+          console.log(data);
           if (res.success) {
             // todo 登录
           }

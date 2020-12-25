@@ -1,4 +1,4 @@
-import axios from './http'
+import axios from './index'
 
 // 首页信息
 export function getHomeInitDataApi() {
@@ -19,20 +19,20 @@ export function getCategoriesApi() {
 }
 
 export function getCategoriesChildApi(id) {
-    return axios.get(`/goods/getCategoriesChild`,{ params:{ id: id}});
+    return axios.get(`/goods/getCategoriesChild`, { params: { id: id } });
 }
 
 export function getCategoriesListApi(data) {
-    return axios.post(`/goods/getCategoriesChildList`,{...data});
+    return axios.post(`/goods/getCategoriesChildList`, { ...data });
 }
 
 // user
 export function userRegisterApi(data) {
-    return axios.post(`/user/register`,{...data});
+    return axios.post(`/user/register`, { ...data });
 }
 
 export function userLoginApi(data) {
-    return axios.post(`/user/login`,{...data});
+    return axios.post(`/user/login`, { ...data });
 }
 
 

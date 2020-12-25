@@ -1,4 +1,4 @@
-import * as api from '../service/api'
+import * as api from '../request/api'
 import { Toast } from 'vant';
 import Cookies from "js-cookie";
 
@@ -21,8 +21,6 @@ const actions = {
         let res = await api.getHomeInitDataApi();
         if (res.data.code == 200) {
             commit('getHomeData', res.data.data);
-        } else {
-            Toast("服务器繁忙，请稍后重试");
         }
     },
     userRegisterFn({ commit }, data) {
@@ -30,7 +28,6 @@ const actions = {
             api.userRegisterApi(data).then(res => {
                 resolve(res);
             }, (error) => {
-                Toast("服务器繁忙，请稍后重试");
                 reject(error);
             })
         });
@@ -38,6 +35,7 @@ const actions = {
     async userLoginFn({ commit }, data) {
         let callData = await api.userLoginApi(data);
         let res = callData.data;
+        console.log(callData)
         if (res.success) {
             commit('setUserToken', res.token);
             Cookies.set('token', res.token, { expires: 0.5 * 60 * 60 * 1000 })

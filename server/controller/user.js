@@ -4,12 +4,15 @@ const { create_token, decode_token } = require('../util/token')
 
 class UserController {
     constructor() { }
+    loginUserInfo = null; // 保存登录用户的信息
+
     /**
      * 验证用户参数是否为空
      */
     static verifyUser(params) {
         if (!params.username || !params.password) {
             ctx.body = {
+                code: 403,
                 message: '用户名或者密码不能为空！',
                 success: false
             }
@@ -22,7 +25,7 @@ class UserController {
      */
     static async create(ctx) {
         const requestParams = ctx.request.body;
-        const { username, password } = ctx.request.body;
+        const { username, password } = requestParams;
         // 生成mongooes model
         const UserMongo = mongoose.model('User');
 
@@ -43,6 +46,7 @@ class UserController {
                 console.log('不存在')
                 let newUser = new UserMongo(requestParams);
 
+                // 存入数据库
                 const res = await newUser.save();
 
                 if (!res.errors) {
@@ -63,6 +67,7 @@ class UserController {
         const { username, password } = ctx.request.body;
         // 验证
         UserController.verifyUser({ username, password });
+
         if (username && password) {
             const UserMongo = mongoose.model('User');
             const userData = new UserMongo()
@@ -74,6 +79,7 @@ class UserController {
                 ctx.body = { code: 200, success: false, mess: "账号不存在，请确认账号！" };
                 return
             }
+
             console.log('存在');
             // 密码是否正确
             let data = await userData.comparePassword(password, existUser.password);
@@ -83,15 +89,22 @@ class UserController {
                 return
             }
 
-            // 判断用户是否登录过 TODO
             if (existUser.token) {
-                // invalid token 是否过期
                 try {
-                    const decodeRes = await decode_token(existUser.token)
+                    const decodeRes = await decode_token(existUser.token + "as");
                     console.log('decodeRes:', decodeRes)
+                    UserController.loginUserInfo = decodeRes;
                     if (!!decodeRes) ctx.body = { code: 200, success: false, mess: '请勿重复登录!' };
                 } catch (err) {
-                    ctx.body = { code: 5001, success: false, mess: 'token失效,请重新登录！' };
+                    // token过期，重新签发token
+                    const result = await UserController.setTokenFn(ctx, existUser);
+                    console.log('login result:', result)
+                    ctx.body = {
+                        code: 200,
+                        success: true,
+                        result: result,
+                        mess: result.mess
+                    }
                 }
             } else {
                 const result = await UserController.setTokenFn(ctx, existUser);
@@ -115,7 +128,7 @@ class UserController {
         // 对比密码是否正确
         const UserMongo = mongoose.model('User');
 
-        return new Promise(async (resolve, reject) => {
+        return new Promise(async (resolve) => {
             try {
                 // jwt签发token
                 const token = create_token({ username: username, _id: existUser._id })
@@ -123,22 +136,17 @@ class UserController {
 
                 UserMongo.updateOne({ '_id': existUser._id }, { 'token': token, 'updateTime': new Date() }, (err, res) => {
                     if (err) {
-                        // ctx.body = { code: 500, success: false, mess: '数据库操作失败，请联系管理员！' }
                         resolve({ status: 0, mess: 'token存数据库失败，请联系管理员！' });
                     } else {
-                        // console.log('res', res);
                         resolve({ status: 1, token: token, mess: '登入成功!', });
-                        // ctx.body = { code: 200, success: true, token: token, mess: '登入成功!' };
                     }
                 });
             } catch (err) {
-                reject({ status: 0, mess: err })
+                resolve({ status: 0, mess: err })
                 throw (err)
             }
-
         })
 
-        // if (data) ctx.body = { code: 200, success: true, token: token, mess: '登入成功!' };
     }
 
     /**
