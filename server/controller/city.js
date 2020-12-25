@@ -6,7 +6,8 @@ const city = require('../data_json/city.json')
 router.get('/', ctx => {
   ctx.body = {
     code: 200,
-    data: 'city'
+    data: city,
+    success: true
   }
 })
 

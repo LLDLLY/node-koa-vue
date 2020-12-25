@@ -37,8 +37,7 @@ class UserController {
             // 查询账号是否存在
             const existUser = await UserMongo.findOne({ 'username': username });
 
-            // status:'0' 账户已存在 
-            // status:'1' 注册成功
+            // status:'0' 账户已存在/失败 status:'1' 注册成功
             if (!!existUser) {
                 console.log('存在');
                 ctx.body = { code: 200, success: false, mess: '账户已存在，请直接登录！', status: '0' };

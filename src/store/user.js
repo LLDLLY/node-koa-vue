@@ -19,8 +19,8 @@ const mutations = {
 const actions = {
     async getHomeDataFn({ commit }, data) {
         let res = await api.getHomeInitDataApi();
-        if (res.data.code == 200) {
-            commit('getHomeData', res.data.data);
+        if (res.code == 200) {
+            commit('getHomeData', res.result);
         }
     },
     userRegisterFn({ commit }, data) {
@@ -34,8 +34,8 @@ const actions = {
     },
     async userLoginFn({ commit }, data) {
         let callData = await api.userLoginApi(data);
-        let res = callData.data;
-        console.log(callData)
+        let res = callData.result;
+
         if (res.success) {
             commit('setUserToken', res.token);
             Cookies.set('token', res.token, { expires: 0.5 * 60 * 60 * 1000 })

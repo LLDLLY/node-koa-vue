@@ -26,7 +26,8 @@ class InsertController {
         })
         ctx.body = {
             code: 200,
-            mess: '导入评论成功'
+            mess: '导入评论成功',
+            success: true
         }
     }
 
@@ -52,7 +53,8 @@ class InsertController {
         })
         ctx.body = {
             code: 200,
-            mess: '导入商品成功'
+            mess: '导入商品成功',
+            success: true
         }
     }
 
@@ -74,7 +76,8 @@ class InsertController {
         })
         ctx.body = {
             code: 200,
-            mess: '导入分类成功'
+            mess: '导入分类成功',
+            success: true
         }
     }
 
@@ -96,7 +99,8 @@ class InsertController {
         })
         ctx.body = {
             code: 200,
-            mess: '导入子分类成功'
+            mess: '导入子分类成功',
+            success: true
         }
     }
 

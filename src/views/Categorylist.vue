@@ -1,26 +1,48 @@
 <template>
   <div id="Categorylist">
     <div>
-      <van-nav-bar fixed title="商品列表" left-text="返回" left-arrow @click-left="backFn"/>
+      <van-nav-bar
+        fixed
+        title="商品列表"
+        left-text="返回"
+        left-arrow
+        @click-left="backFn"
+      />
     </div>
     <div class="content">
       <van-row type="flex">
         <van-col span="6">
           <ul class="cate_big">
-            <li v-for="(item,index) in goodsCategories" :key="index" @click="getCategoriesChild(item.ID)" >{{item.MALL_CATEGORY_NAME}}</li>
+            <li
+              v-for="(item, index) in goodsCategories"
+              :key="index"
+              @click="getCategoriesChild(item.ID)"
+            >
+              {{ item.MALL_CATEGORY_NAME }}
+            </li>
           </ul>
         </van-col>
         <van-col span="18">
           <van-tabs v-model="active" @click="changeTab">
-            <van-tab v-for="(item,index) in categoriesChild" :key="index" :title="item.MALL_SUB_NAME" >
+            <van-tab
+              v-for="(item, index) in categoriesChild"
+              :key="index"
+              :title="item.MALL_SUB_NAME"
+            >
               <ul class="cate_detail">
-                <li v-for='(item,index) in cateList' :key='index' @click="goGoodsInfo(item.ID)">
+                <li
+                  v-for="(item, index) in cateList"
+                  :key="index"
+                  @click="goGoodsInfo(item.ID)"
+                >
                   <van-col span="8">
-                    <img :src="item.IMAGE1" alt="">
+                    <img :src="item.IMAGE1" alt="" />
                   </van-col>
                   <van-col span="16">
-                    <p class="title">{{item.NAME}}</p>
-                    <p class="price">￥<span>{{item.ORI_PRICE|toMoney }}</span> 元</p>
+                    <p class="title">{{ item.NAME }}</p>
+                    <p class="price">
+                      ￥<span>{{ item.ORI_PRICE | toMoney }}</span> 元
+                    </p>
                   </van-col>
                 </li>
               </ul>
@@ -49,18 +71,18 @@ export default {
       finished: false,
       selectedCate: {},
       cateList: [],
-      cateTabFrist:[],
-      page: 1
+      cateTabFrist: [],
+      page: 1,
     };
   },
   computed: {
     ...mapGetters({
-      goodsCategories: "getgoodsCategoriesGetter"
-    })
+      goodsCategories: "getgoodsCategoriesGetter",
+    }),
   },
   created() {
     this.$store.dispatch("getGoodsCategoriesFn");
-    this.getCategoriesChild(1)
+    this.getCategoriesChild(1);
   },
   methods: {
     backFn() {
@@ -68,44 +90,44 @@ export default {
     },
     getCategoriesChild(id) {
       this.active = 0;
-      getCategoriesChildApi(id).then(res => {
-        if (res.data.code == 200) {
-          this.categoriesChild = res.data.data;
+      getCategoriesChildApi(id).then((res) => {
+        console.log(res);
+        if (res.code == 200) {
+          this.categoriesChild = res.result;
           // 大类切换，自动加载第一个tab里的数据
-          this.changeList(res.data.data[0].ID);  
+          this.changeList(this.categoriesChild[0].ID);
         }
       });
-      
     },
     changeTab(index, title) {
-        let _this = this;
-        this.categoriesChild.forEach(item => {
-            if (item.MALL_SUB_NAME == title) {
-            _this.selectedCate = item;
-            _this.changeList(item.ID);
-            }
-        });
-    },
-    changeList(id){
-        const _this = this;
-        let param = {
-            page:_this.page,
-            id:id
+      let _this = this;
+      this.categoriesChild.forEach((item) => {
+        if (item.MALL_SUB_NAME == title) {
+          _this.selectedCate = item;
+          _this.changeList(item.ID);
         }
-        getCategoriesListApi(param).then(res=>{
-           if(res.data.code == 200){
-               _this.cateList = res.data.data;
-           }
-        })
+      });
     },
-    goGoodsInfo(goodsId){
+    changeList(id) {
+      const _this = this;
+      let param = {
+        page: _this.page,
+        id: id,
+      };
+      getCategoriesListApi(param).then((res) => {
+        if (res.code == 200) {
+          _this.cateList = res.result;
+        }
+      });
+    },
+    goGoodsInfo(goodsId) {
       this.$router.push({
         path: "/goods",
         query: {
-          goodsId
-        }
+          goodsId,
+        },
       });
-    }
+    },
   },
 };
 </script>
@@ -121,7 +143,6 @@ export default {
     padding-top: 45px;
     height: 100%;
     .cate_big {
-   
       height: 100%;
       background-color: aliceblue;
       li {
@@ -134,7 +155,7 @@ export default {
       }
     }
     .cate_detail {
-         margin-bottom: 2.8rem;
+      margin-bottom: 2.8rem;
       li {
         display: flex;
         // height: 5rem;
@@ -151,15 +172,15 @@ export default {
           padding-left: 0.4rem;
         }
         p.title {
-            font-size: 0.7rem;
-            color: #333;
-            font-weight: 500;
-            width: 8rem;
+          font-size: 0.7rem;
+          color: #333;
+          font-weight: 500;
+          width: 8rem;
         }
         p.price {
           font-size: 0.68rem;
-          span{
-            color:rgb(255, 94, 0);
+          span {
+            color: rgb(255, 94, 0);
           }
         }
       }

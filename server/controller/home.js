@@ -6,7 +6,7 @@ class HomeData {
     static async getHomeInitData(ctx) {
         ctx.body = {
             code: 200,
-            data: homeData.data,
+            result: homeData.data,
             success: true
         };
     }
