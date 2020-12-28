@@ -1,5 +1,8 @@
 # koa-vue
 
+### 技术栈
+vue2.x + vuex + vant + koa + mongoose
+
 ## Project setup
 ```
 npm install
