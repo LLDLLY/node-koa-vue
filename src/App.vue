@@ -10,18 +10,10 @@
       @change="changeTabbar(active)"
       v-if="this.$store.state.common.show"
     >
-      <van-tabbar-item icon="shop">
-        首页
-      </van-tabbar-item>
-      <van-tabbar-item icon="records">
-        商品分类
-      </van-tabbar-item>
-      <van-tabbar-item icon="cart">
-        购物车
-      </van-tabbar-item>
-      <van-tabbar-item icon="contact">
-        个人中心
-      </van-tabbar-item>
+      <van-tabbar-item icon="shop"> 首页 </van-tabbar-item>
+      <van-tabbar-item icon="records"> 商品分类 </van-tabbar-item>
+      <van-tabbar-item icon="cart"> 购物车 </van-tabbar-item>
+      <van-tabbar-item icon="contact"> 个人中心 </van-tabbar-item>
     </van-tabbar>
   </div>
 </template>
@@ -33,11 +25,11 @@ export default {
   data() {
     return {
       active: 0,
-      path: "" // 当前路径
+      path: "", // 当前路径
     };
   },
   computed: {
-    ...mapState(["cartInfo"])
+    ...mapState(["cartInfo"]),
   },
   created() {
     this.changeTabBarActive();
@@ -86,15 +78,14 @@ export default {
           this.$router.push("/center");
           break;
       }
-    }
+    },
   },
-  watch: {}
+  watch: {},
 };
 </script>
 
 <style scoped>
 #app {
-  padding-bottom: 2.5rem;
   height: 100%;
 }
 </style>

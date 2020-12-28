@@ -17,38 +17,53 @@ const router = new Router({
     {
       path: "/home",
       name: "ShoppingMall",
+      meta: {
+        tabbar: true,
+        title: '首页'
+      },
       component: resolve => {
         require(["@/views/home/home.vue"], resolve);
-      },
+      }
+    },
+    {
+      path: "/citys",
+      name: "Citys",
       meta: {
-        tabbar: true
+        tabbar: false,
+        title: '城市列表'
+      },
+      component: resolve => {
+        require(["@/views/home/city.vue"], resolve);
       }
     },
     {
       path: "/goods",
       name: "Goods",
+      meta: {
+        tabbar: false,
+        title: '商品详情'
+      },
       component: resolve => {
         require(["@/views/category/goods.vue"], resolve);
-      },
-      meta: {
-        tabbar: false
       }
     },
     {
       path: "/cart",
       name: "Cart",
+      meta: {
+        tabbar: true,
+        title: '购物车'
+      },
       component: resolve => {
         require(["@/views/cart/cart.vue"], resolve);
-      },
-      meta: {
-        tabbar: true
       }
     },
     {
       path: "/categorylist",
       name: "Categorylist",
       meta: {
-        tabbar: true
+        tabbar: true,
+        title: '商品分类'
       },
       component: resolve => {
         require(["@/views/category/category.vue"], resolve);
@@ -59,7 +74,8 @@ const router = new Router({
       name: "Center",
       meta: {
         auth: true,
-        tabbar: true
+        tabbar: true,
+        title: '个人中心'
       },
       component: resolve => {
         require(["@/views/center/center.vue"], resolve);
@@ -69,7 +85,8 @@ const router = new Router({
       path: "/register",
       name: "Register",
       meta: {
-        tabbar: false
+        tabbar: false,
+        title: '注册'
       },
       component: resolve => {
         require(["@/views/center/register.vue"], resolve);
@@ -79,7 +96,8 @@ const router = new Router({
       path: "/login",
       name: "Login",
       meta: {
-        tabbar: false
+        tabbar: false,
+        title: '登录'
       },
       component: resolve => {
         require(["@/views/center/login.vue"], resolve);
@@ -89,7 +107,8 @@ const router = new Router({
       path: "/setting",
       name: "Setting",
       meta: {
-        tabbar: false
+        tabbar: false,
+        title: '设置'
       },
       component: resolve => {
         require(["@/views/center/setting.vue"], resolve);
@@ -102,6 +121,7 @@ const router = new Router({
 // 判断是否需要登录权限 以及是否登录
 router.beforeEach((to, from, next) => {
 
+  document.title = to.meta.title;
   // tabbar 显示逻辑
   store.commit("changeShow", to.matched.some(res => res.meta.tabbar));
 

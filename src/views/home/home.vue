@@ -2,15 +2,9 @@
   <div id="ShoppingMall">
     <van-sticky>
       <van-row class="search-top" type="flex" justify="space-between">
-        <van-col span="4">
+        <van-col span="4" @click="selectCity">
           <!-- 定位icon -->
-          <img
-            @click="selectCity"
-            class="location-icon"
-            :src="locationIcon"
-            alt
-            width="35%"
-          />
+          <img class="location-icon" :src="locationIcon" alt width="35%" />
           <span class="city">{{ city }}</span>
         </van-col>
         <!-- 搜索 -->
@@ -112,7 +106,7 @@ export default {
     Banner,
     swiper,
     swiperSlide,
-    Foods
+    Foods,
   },
   data() {
     return {
@@ -121,14 +115,14 @@ export default {
       city: "上海",
       imagesList: [],
       options: {
-        slidesPerView: 2.5
-      }
+        slidesPerView: 2.5,
+      },
     };
   },
   computed: {
     ...mapGetters({
-      homeData: "getHomeInitData"
-    })
+      homeData: "getHomeInitData",
+    }),
   },
   created() {
     this.$store.dispatch("getHomeDataFn").then(() => {
@@ -146,20 +140,22 @@ export default {
       this.$router.push({
         path: "/goods",
         query: {
-          goodsId
-        }
+          goodsId,
+        },
       });
     },
-    selectCity() {},
+    selectCity() {
+      this.$router.push("/city");
+    },
     onCancel() {
       this.search = "";
-    }
+    },
   },
   watch: {
     search() {
       // search
-    }
-  }
+    },
+  },
 };
 </script>
 <style>
