@@ -1,6 +1,7 @@
 import * as api from '../request/api'
 import { Toast } from 'vant';
-import Cookies from "js-cookie";
+import { Utils, CONSTANT } from '../utiles/modules-index'
+
 
 const state = {
     show: true,
@@ -32,16 +33,18 @@ const actions = {
             })
         });
     },
-    async userLoginFn({ commit }, data) {
-        let callData = await api.userLoginApi(data);
-        let res = callData.result;
+    userLoginFn({ commit }, data) {
+        return new Promise(async resolve => {
+            let res = await api.userLoginApi(data);
+            let result = res.result || null;
+            resolve(result)
+            if (res.success) {
+                Utils.setLocal(CONSTANT.LOCAL_TOKEN_NAME, result.token)
+            } else {
+                Toast(res.mess);
+            }
+        })
 
-        if (res.success) {
-            commit('setUserToken', res.token);
-            Cookies.set('token', res.token, { expires: 0.5 * 60 * 60 * 1000 })
-        } else {
-            Toast(res.mess);
-        }
     }
 }
 

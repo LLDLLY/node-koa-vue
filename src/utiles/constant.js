@@ -21,6 +21,6 @@ export const CONSTANT = {
     "SUCCESS_RES": true
   },
   "LOADING_TIME": 3000,
-  "TOKEN_NAME": "Token",
+  "TOKEN_NAME": "DT-KKHHB-OOJ",
   "LOCAL_TOKEN_NAME": "DNF-ST-BT-AT"
 }

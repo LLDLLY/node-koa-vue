@@ -68,12 +68,11 @@ export default {
           username: this.username,
           password: this.password,
         })
-        .then((data) => {
+        .then((res) => {
           this.openLoading = false;
-          let res = data.data;
-          console.log(data);
-          if (res.success) {
-            // todo 登录
+          if (!res) return;
+          if (res.status === 1) {
+            this.$router.push("/center");
           }
         });
     },

@@ -63,7 +63,7 @@ class Utils {
    */
   getLocal = (name) => {
     const item = window.localStorage.getItem(name)
-    return item ? JSON.parse(this.decrypt(item)) : null
+    return item ? this.decrypt(item) : null
   }
 
   /**
@@ -86,7 +86,7 @@ class Utils {
    */
   getSession = (name) => {
     const item = window.sessionStorage.getItem(name)
-    return item ? JSON.parse(this.decrypt(item)) : null
+    return item ? this.decrypt(item) : null
   }
 
   /**

@@ -7,25 +7,22 @@
       @click-left="goBack"
     />
     <van-cell-group>
-      <van-cell  title="登录" is-link to='login'/>
-      <van-cell  title="注册" is-link to='register'/>
-      <van-cell  title="注销" is-link  />
-      <van-cell  title="修改密码" is-link to='' />
+      <!-- <van-cell  title="登录" is-link to='login'/> -->
+      <!-- <van-cell  title="注册" is-link to='register'/> -->
+      <van-cell title="注销" is-link />
+      <van-cell title="修改密码" is-link to="" />
     </van-cell-group>
   </div>
 </template>
 
 <script>
 export default {
-  created(){
-    
-  },
-  mounted(){
-  },
+  created() {},
+  mounted() {},
   methods: {
-       goBack () {
-        this.$router.back()
-      },
+    goBack() {
+      this.$router.back();
+    },
   },
 };
 </script>

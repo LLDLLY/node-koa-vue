@@ -14,7 +14,8 @@ module.exports = {
     },
     TOKEN: {
         TOKEN_ENCODE_STR: 'ksdIBNKJNKJNjksnfksjdnljkjKJHBJsdsd',
-        TOKEN_EXPIRES: '1day'
+        TOKEN_EXPIRES: '1day',
+        TOKEN_NAME: 'DT-KKHHB-OOJ'
     }
 }
 
