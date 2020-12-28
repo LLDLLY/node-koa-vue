@@ -82,7 +82,9 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang='less'>
+@import url("./assets/style/common.less");
+@import url("./assets/style/vant.less");
 #app {
   height: 100%;
 }
