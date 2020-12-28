@@ -1,4 +1,4 @@
-import * as api from '../service/api'
+import * as api from '../request/api'
 
 const state = {
   show: true,

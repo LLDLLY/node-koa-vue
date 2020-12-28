@@ -57,7 +57,7 @@
 <script>
 import { mapGetters } from "vuex";
 import { toMoney } from "../filter/moneyFilter.js";
-import { getCategoriesChildApi, getCategoriesListApi } from "../service/api";
+import { getCategoriesChildApi, getCategoriesListApi } from "../request/api";
 export default {
   data() {
     return {
