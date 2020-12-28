@@ -56,7 +56,6 @@
 
 <script>
 import { mapGetters } from "vuex";
-import { toMoney } from "../../filter/moneyFilter.js";
 import { getCategoriesChildApi, getCategoriesListApi } from "../../request/api";
 export default {
   data() {
@@ -72,13 +71,13 @@ export default {
       selectedCate: {},
       cateList: [],
       cateTabFrist: [],
-      page: 1
+      page: 1,
     };
   },
   computed: {
     ...mapGetters({
-      goodsCategories: "getgoodsCategoriesGetter"
-    })
+      goodsCategories: "getgoodsCategoriesGetter",
+    }),
   },
   created() {
     this.$store.dispatch("getGoodsCategoriesFn");
@@ -90,7 +89,7 @@ export default {
     },
     getCategoriesChild(id) {
       this.active = 0;
-      getCategoriesChildApi(id).then(res => {
+      getCategoriesChildApi(id).then((res) => {
         console.log(res);
         if (res.code == 200) {
           this.categoriesChild = res.result;
@@ -101,7 +100,7 @@ export default {
     },
     changeTab(index, title) {
       let _this = this;
-      this.categoriesChild.forEach(item => {
+      this.categoriesChild.forEach((item) => {
         if (item.MALL_SUB_NAME == title) {
           _this.selectedCate = item;
           _this.changeList(item.ID);
@@ -112,9 +111,9 @@ export default {
       const _this = this;
       let param = {
         page: _this.page,
-        id: id
+        id: id,
       };
-      getCategoriesListApi(param).then(res => {
+      getCategoriesListApi(param).then((res) => {
         if (res.code == 200) {
           _this.cateList = res.result;
         }
@@ -124,11 +123,11 @@ export default {
       this.$router.push({
         path: "/goods",
         query: {
-          goodsId
-        }
+          goodsId,
+        },
       });
-    }
-  }
+    },
+  },
 };
 </script>
 <style>

@@ -2,7 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router/router";
 import store from "./store/index";
-import filters from "./filter/moneyFilter";
+import filters from "./filter/filter";
 import { CONSTANT } from "./utiles/modules-index";
 
 import {
@@ -26,7 +26,8 @@ import {
   Cell,
   CellGroup,
   Field,
-  Sticky
+  Sticky,
+  IndexBar, IndexAnchor
 } from "vant";
 Vue.use(Button)
   .use(Tabbar)
@@ -48,7 +49,9 @@ Vue.use(Button)
   .use(Cell)
   .use(CellGroup)
   .use(Field)
-  .use(Sticky);
+  .use(Sticky)
+  .use(IndexBar)
+  .use(IndexAnchor)
 
 // 统一toast 关闭时间 3s
 Toast.setDefaultOptions({ duration: CONSTANT.LOADING_TIME });

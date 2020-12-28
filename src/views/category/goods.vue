@@ -47,7 +47,6 @@
 
 <script>
 import { mapGetters } from "vuex";
-import { toMoney } from "../../filter/moneyFilter.js";
 export default {
   name: "Goods",
   data() {
@@ -56,14 +55,14 @@ export default {
       active: 0,
       goodsId: "",
       goodsInfo: {}, // 商品详情
-      ratings: [] // 商品评论
+      ratings: [], // 商品评论
     };
   },
   computed: {
     ...mapGetters({
       goodsDetail: "getGoodsDetailGetter",
-      goodsComments: "getGoodSCommentGetter"
-    })
+      goodsComments: "getGoodSCommentGetter",
+    }),
   },
   created() {
     window.scrollTo(0, 0);
@@ -79,8 +78,8 @@ export default {
     },
     toPay() {
       alert("直接购买");
-    }
-  }
+    },
+  },
 };
 </script>
 <style>
