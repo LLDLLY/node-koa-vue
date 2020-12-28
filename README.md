@@ -7,43 +7,6 @@
 ## 简介
  前端vue、后端koa搭建的一个商城类的H5项目，包括：首页、商品分类、购物车、个人中心四个大模块，主要是用于学习全栈开发。
 
-## 项目目录结构
-
-```
-
-├── README.md                                        // 项目使用说明文件
-├── package.json                                     // 项目依赖和常用脚本命令配置
-├── postcss.config.js                                // postcss配置
-├── vue.config.js                                    // vue-cli-service配置
-├── babel.config.js                                  // vue-cli-service babel配置
-├── public                                           // 静态文件存放目录
-│   ├── favicon.ico                                  // 项目图标
-│   └── index.html                                   // index页面
-├── src
-│   ├── assets                                       // 资源目录
-│   │   ├── img                                      // 图片
-│   │   └── style                                    // 样式文件
-│   │── filter                                       // vue filter
-│   │   ...                                    
-│   │── request                                      // axios请求
-│   │   ├── api                                      // api
-│   │   ├── base.url                                 // baseUrl环境区分
-│   │   ├── index                                    // axios初始化
-│   │   └── request.config                           // axios拦截器封装
-│   │── router                                        
-│   │   └── router                                   // 路由
-│   │── store                                        // vuex
-│   │   ...                                          
-│   │── utiles                                       // 工具类目录
-│   │   ├── constant                                 // 全局常量
-│   │   ├── modules-index                            // 公共导入类(导出所有公共文件)
-│   │   └── utils                                    // 工具类
-│   │── views                                        // 组件目录 
-│   │   ...                                          
-│── App.vue                                          // VUE主文件
-└── main.js                                          // Main主文件
-
-```
 ## 项目启动及构建
 
 ### 下载依赖
