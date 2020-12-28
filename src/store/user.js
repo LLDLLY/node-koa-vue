@@ -3,14 +3,10 @@ import { Toast } from "vant";
 import { Utils, CONSTANT } from "../utiles/modules-index";
 
 const state = {
-  show: true,
   userToken: ""
 };
 
 const mutations = {
-  changeShow(state, data) {
-    state.show = data;
-  },
   setUserToken(state, data) {
     state.userToken = data;
   }

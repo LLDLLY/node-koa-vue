@@ -1,3 +1,3 @@
-<template> </template>
+<template><div>购物车</div></template>
 <script></script>
 <style scoped lang="less"></style>

@@ -19,6 +19,9 @@ const router = new Router({
       name: "ShoppingMall",
       component: resolve => {
         require(["@/views/home/home.vue"], resolve);
+      },
+      meta: {
+        tabbar: true
       }
     },
     {
@@ -26,11 +29,27 @@ const router = new Router({
       name: "Goods",
       component: resolve => {
         require(["@/views/category/goods.vue"], resolve);
+      },
+      meta: {
+        tabbar: false
+      }
+    },
+    {
+      path: "/cart",
+      name: "Cart",
+      component: resolve => {
+        require(["@/views/cart/cart.vue"], resolve);
+      },
+      meta: {
+        tabbar: true
       }
     },
     {
       path: "/categorylist",
       name: "Categorylist",
+      meta: {
+        tabbar: true
+      },
       component: resolve => {
         require(["@/views/category/category.vue"], resolve);
       }
@@ -39,7 +58,8 @@ const router = new Router({
       path: "/center",
       name: "Center",
       meta: {
-        auth: true
+        auth: true,
+        tabbar: true
       },
       component: resolve => {
         require(["@/views/center/center.vue"], resolve);
@@ -48,22 +68,29 @@ const router = new Router({
     {
       path: "/register",
       name: "Register",
+      meta: {
+        tabbar: false
+      },
       component: resolve => {
         require(["@/views/center/register.vue"], resolve);
       }
     },
-    ,
     {
       path: "/login",
       name: "Login",
+      meta: {
+        tabbar: false
+      },
       component: resolve => {
         require(["@/views/center/login.vue"], resolve);
       }
     },
-    ,
     {
       path: "/setting",
       name: "Setting",
+      meta: {
+        tabbar: false
+      },
       component: resolve => {
         require(["@/views/center/setting.vue"], resolve);
       }
@@ -71,18 +98,13 @@ const router = new Router({
   ]
 });
 
-let arr = ["Setting", "Login", "Register", "Goods"];
 
 // 判断是否需要登录权限 以及是否登录
 router.beforeEach((to, from, next) => {
-  for (var i = 0; i < arr.length; i++) {
-    if (to.name == arr[i]) {
-      store.commit("changeShow", false);
-      break;
-    } else {
-      store.commit("changeShow", true);
-    }
-  }
+
+  // tabbar 显示逻辑
+  store.commit("changeShow", to.matched.some(res => res.meta.tabbar));
+
   if (to.matched.some(res => res.meta.auth)) {
     // 判断是否需要登录权限
     if (Utils.getLocal(CONSTANT.LOCAL_TOKEN_NAME)) {
@@ -91,13 +113,19 @@ router.beforeEach((to, from, next) => {
     } else {
       // 没登录则跳转到登录界面
       Toast("请登录");
-      next({
-        path: "/Login"
-      });
+      next('/login')
     }
   } else {
     next();
   }
 });
+
+
+// 重写push,避免报错（vue-router.esm.js?8c4f:2008 Uncaught (in promise) Error:）
+const originalPush = Router.prototype.push;
+Router.prototype.push = function push(location, onResolve, onReject) {
+  if (onResolve || onReject) return originalPush.call(this, location, onResolve, onReject)
+  return originalPush.call(this, location).catch(err => err)
+}
 
 export default router;

@@ -50,7 +50,7 @@ export default {
       password: "",
       openLoading: false, // 注册loading
       usernameErrorMsg: "", // 当用户名出现错误时的提示
-      passwordErrorMsg: "" // 当密码出现错误时的提示
+      passwordErrorMsg: "", // 当密码出现错误时的提示
     };
   },
   created() {},
@@ -66,9 +66,9 @@ export default {
       this.$store
         .dispatch("userLoginFn", {
           username: this.username,
-          password: this.password
+          password: this.password,
         })
-        .then(res => {
+        .then((res) => {
           this.openLoading = false;
           if (!res) return;
           if (res.status === 1) {
@@ -91,8 +91,8 @@ export default {
         this.passwordErrorMsg = "";
       }
       return isOK;
-    }
-  }
+    },
+  },
 };
 </script>
 
