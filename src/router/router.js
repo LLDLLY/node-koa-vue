@@ -26,8 +26,8 @@ const router = new Router({
       }
     },
     {
-      path: "/citys",
-      name: "Citys",
+      path: "/cityList",
+      name: "CityList",
       meta: {
         tabbar: false,
         title: '城市列表'

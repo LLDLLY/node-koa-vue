@@ -1,10 +1,8 @@
 <template>
   <div id="app">
-    <div>
-      <keep-alive exclude="Goods,Cart,Center">
-        <router-view></router-view>
-      </keep-alive>
-    </div>
+    <keep-alive exclude="Goods,Cart,Center">
+      <router-view></router-view>
+    </keep-alive>
     <van-tabbar
       v-model="active"
       @change="changeTabbar(active)"

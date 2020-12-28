@@ -145,7 +145,7 @@ export default {
       });
     },
     selectCity() {
-      this.$router.push("/city");
+      this.$router.push("/cityList");
     },
     onCancel() {
       this.search = "";
