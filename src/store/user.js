@@ -18,12 +18,6 @@ const mutations = {
 }
 
 const actions = {
-    async getHomeDataFn({ commit }, data) {
-        let res = await api.getHomeInitDataApi();
-        if (res.code == 200) {
-            commit('getHomeData', res.result);
-        }
-    },
     userRegisterFn({ commit }, data) {
         return new Promise((resolve, reject) => {
             api.userRegisterApi(data).then(res => {

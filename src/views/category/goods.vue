@@ -1,45 +1,53 @@
 <template>
   <div>
     <div>
-      <van-nav-bar fixed title="商品详情" left-text="返回" left-arrow @click-left="backFn"/>
+      <van-nav-bar
+        fixed
+        title="商品详情"
+        left-text="返回"
+        left-arrow
+        @click-left="backFn"
+      />
     </div>
     <div class="goods_img">
-      <img :src="goodsDetail&&goodsDetail.IMAGE1" alt>
+      <img :src="goodsDetail && goodsDetail.IMAGE1" alt />
     </div>
-    <p class="good_title">{{goodsDetail&&goodsDetail.NAME}}</p>
-    <p class="good_price">价格: ￥{{goodsDetail&&goodsDetail.PRESENT_PRICE | toMoney}}元</p>
-    <van-tabs swipeable sticky :offset-top='46'>
+    <p class="good_title">{{ goodsDetail && goodsDetail.NAME }}</p>
+    <p class="good_price">
+      价格: ￥{{ goodsDetail && goodsDetail.PRESENT_PRICE | toMoney }}元
+    </p>
+    <van-tabs swipeable sticky :offset-top="46">
       <van-tab title="商品详情">
         <div class="detail" v-html="goodsDetail.DETAIL"></div>
       </van-tab>
       <van-tab title="评论">
         <ul>
-          <li class="rating-item van-hairline--bottom" v-for="(item,index) in goodsComments" :key='index'>
+          <li
+            class="rating-item van-hairline--bottom"
+            v-for="(item, index) in goodsComments"
+            :key="index"
+          >
             <div class="avatar">
-              <img
-                width="28"
-                height="28"
-                :src="item.avatar"
-              >
+              <img width="28" height="28" :src="item.avatar" />
             </div>
             <div class="content">
-              <h1 class="name">{{item.username}}</h1>
-              <p class="text">{{item.text}}</p>
+              <h1 class="name">{{ item.username }}</h1>
+              <p class="text">{{ item.text }}</p>
             </div>
           </li>
         </ul>
       </van-tab>
     </van-tabs>
     <div class="bottom_button">
-        <van-button type="primary" @click = 'toCar'>加入购物车</van-button>
-        <van-button type="danger" @click = 'toPay'>直接购买</van-button>
+      <van-button type="primary" @click="toCar">加入购物车</van-button>
+      <van-button type="danger" @click="toPay">直接购买</van-button>
     </div>
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
-import { toMoney } from "../filter/moneyFilter.js";
+import { toMoney } from "../../filter/moneyFilter.js";
 export default {
   name: "Goods",
   data() {
@@ -48,14 +56,14 @@ export default {
       active: 0,
       goodsId: "",
       goodsInfo: {}, // 商品详情
-      ratings: []    // 商品评论
+      ratings: [], // 商品评论
     };
   },
   computed: {
     ...mapGetters({
       goodsDetail: "getGoodsDetailGetter",
-      goodsComments: "getGoodSCommentGetter"
-    })
+      goodsComments: "getGoodSCommentGetter",
+    }),
   },
   created() {
     window.scrollTo(0, 0);
@@ -67,12 +75,12 @@ export default {
       this.$router.back();
     },
     toCar() {
-      alert('加入购物车');  
+      alert("加入购物车");
     },
-    toPay(){
-      alert('直接购买');
-    }
-  }
+    toPay() {
+      alert("直接购买");
+    },
+  },
 };
 </script>
 <style>
@@ -119,10 +127,10 @@ h1.name {
   display: flex;
   padding: 0.5rem;
 }
-.bottom_button{
+.bottom_button {
   background-color: #fff;
   padding: 5px;
-  width:100%;
+  width: 100%;
   position: fixed;
   bottom: 0rem;
   text-align: center;
@@ -131,5 +139,5 @@ h1.name {
     width: 47%;
     margin: 0 2px;
   }
-} 
+}
 </style>

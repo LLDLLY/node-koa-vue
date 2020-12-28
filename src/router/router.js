@@ -18,17 +18,17 @@ const router = new Router({
         {
             path: '/home',
             name: 'ShoppingMall',
-            component: resolve => { require(['@/views/ShoppingMall.vue'], resolve) }
+            component: resolve => { require(['@/views/home/home.vue'], resolve) }
         },
         {
             path: '/goods',
             name: 'Goods',
-            component: resolve => { require(['@/views/Goods.vue'], resolve) }
+            component: resolve => { require(['@/views/category/goods.vue'], resolve) }
         },
         {
             path: '/categorylist',
             name: 'Categorylist',
-            component: resolve => { require(['@/views/Categorylist.vue'], resolve) }
+            component: resolve => { require(['@/views/category/category.vue'], resolve) }
         },
         {
             path: '/center',
@@ -36,21 +36,21 @@ const router = new Router({
             meta: {
                 auth: true
             },
-            component: resolve => { require(['@/views/Center.vue'], resolve) }
+            component: resolve => { require(['@/views/center/center.vue'], resolve) }
         }, {
             path: '/register',
             name: 'Register',
-            component: resolve => { require(['@/views/Register.vue'], resolve) }
+            component: resolve => { require(['@/views/center/register.vue'], resolve) }
         },
         , {
             path: '/login',
             name: 'Login',
-            component: resolve => { require(['@/views/Login.vue'], resolve) }
+            component: resolve => { require(['@/views/center/login.vue'], resolve) }
         },
         , {
             path: '/setting',
             name: 'Setting',
-            component: resolve => { require(['@/views/Setting.vue'], resolve) }
+            component: resolve => { require(['@/views/center/setting.vue'], resolve) }
         },
     ]
 });

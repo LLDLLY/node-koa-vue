@@ -103,8 +103,8 @@
 </template>
 <script>
 import { mapState, mapActions, mapGetters } from "vuex";
-import Banner from "./components/banner.vue";
-import Foods from "./components/foods.vue";
+import Banner from "../components/banner.vue";
+import Foods from "../components/foods.vue";
 import "swiper/dist/css/swiper.css";
 import { swiper, swiperSlide } from "vue-awesome-swiper";
 export default {
@@ -117,7 +117,7 @@ export default {
   data() {
     return {
       search: "",
-      locationIcon: require("../assets/img/location.png"),
+      locationIcon: require("../../assets/img/location.png"),
       city: "上海",
       imagesList: [],
       options: {
