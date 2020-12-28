@@ -1,7 +1,7 @@
 # koa-vue
 
 ## 技术栈
-1. 前端: vue 2.x (基础框架) vuex 3.x (状态管理) + vant 组件库 + vue-cli-service (编译方案)
+1. 前端: vue 2.x (基础框架) + vuex 3.x (状态管理) + vant 组件库 + vue-cli-service (编译方案)
 2. 后端: koa 2.x (基础框架) + MongoDB (数据库) + mongoose 5.x (链接数据库工具)
 
 ## 简介
