@@ -1,4 +1,4 @@
-import { CONSTANT } from "./constant"
-import Utils from "./utils"
+import { CONSTANT } from "./constant";
+import Utils from "./utils";
 
-export { CONSTANT, Utils }
+export { CONSTANT, Utils };

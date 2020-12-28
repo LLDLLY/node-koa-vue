@@ -6,7 +6,7 @@ module.exports = {
   extends: ["plugin:vue/essential", "@vue/prettier"],
   rules: {
     "no-console": process.env.NODE_ENV === "production" ? "error" : "off",
-    "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off",
+    "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off"
     // "quotes": [2, "single", "avoid-escape"],
     // 不允许多个空行
     // "no-multiple-empty-lines": [2, { "max": 2 }],

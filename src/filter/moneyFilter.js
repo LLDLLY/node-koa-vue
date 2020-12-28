@@ -1,6 +1,6 @@
-const toMoney = function(money = 0){
+const toMoney = function(money = 0) {
   return money.toFixed(2);
-}
-export default{
+};
+export default {
   toMoney
-}
+};

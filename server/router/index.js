@@ -4,6 +4,7 @@ const UserController = require("../controller/user");
 const HomeController = require("../controller/home");
 const GoodsController = require("../controller/goods");
 const InsertController = require("../controller/data");
+const CityController = require("../controller/city")
 
 const router = new Router({
     prefix: "/api/v1"
@@ -21,6 +22,11 @@ router.get("/insert/allCategorySub", InsertController.insertAllCategorySub);
  * home页面数据
  */
 router.get("/home", HomeController.getHomeInitData);
+
+/**
+ * 城市数据
+ */
+router.get("/city", CityController.getCityInitData);
 
 /**
  * 用户接口

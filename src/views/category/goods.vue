@@ -56,14 +56,14 @@ export default {
       active: 0,
       goodsId: "",
       goodsInfo: {}, // 商品详情
-      ratings: [], // 商品评论
+      ratings: [] // 商品评论
     };
   },
   computed: {
     ...mapGetters({
       goodsDetail: "getGoodsDetailGetter",
-      goodsComments: "getGoodSCommentGetter",
-    }),
+      goodsComments: "getGoodSCommentGetter"
+    })
   },
   created() {
     window.scrollTo(0, 0);
@@ -79,8 +79,8 @@ export default {
     },
     toPay() {
       alert("直接购买");
-    },
-  },
+    }
+  }
 };
 </script>
 <style>
@@ -88,7 +88,7 @@ export default {
   font-weight: 400;
 }
 </style>
-<style scoped lang='less'>
+<style scoped lang="less">
 h1.name {
   padding-left: 0.5rem;
   font-size: 0.8rem;

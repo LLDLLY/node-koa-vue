@@ -6,7 +6,7 @@
         :key="index"
         @click.native="goGoodsInfo(item.goodsId)"
       >
-        <img v-lazy="item.image">
+        <img v-lazy="item.image" />
       </van-swipe-item>
     </van-swipe>
   </div>
@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     goGoodsInfo(id) {
-      this.$router.push({ path: "/goods", query: { 'goodsId': id }});
+      this.$router.push({ path: "/goods", query: { goodsId: id } });
     }
   }
 };
@@ -37,8 +37,7 @@ export default {
   max-height: 9rem;
   overflow: hidden;
 }
-img{
+img {
   width: 100%;
 }
 </style>
-

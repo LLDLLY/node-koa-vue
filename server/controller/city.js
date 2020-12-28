@@ -1,14 +1,15 @@
-const Router = require('koa-router')
-const router = new Router()
 
-const city = require('../data_json/city.json')
 
-router.get('/', ctx => {
-  ctx.body = {
-    code: 200,
-    data: city,
-    success: true
+const city = require('../json/mongo_json/city.json')
+class CityController {
+  constructor() { }
+  /**home页面初始化数据 数据未走数据库*/
+  static async getCityInitData(ctx) {
+    ctx.body = {
+      code: 200,
+      result: city,
+      success: true
+    };
   }
-})
-
-module.exports = router
+}
+module.exports = CityController

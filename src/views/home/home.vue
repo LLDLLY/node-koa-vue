@@ -112,7 +112,7 @@ export default {
     Banner,
     swiper,
     swiperSlide,
-    Foods,
+    Foods
   },
   data() {
     return {
@@ -121,14 +121,14 @@ export default {
       city: "上海",
       imagesList: [],
       options: {
-        slidesPerView: 2.5,
-      },
+        slidesPerView: 2.5
+      }
     };
   },
   computed: {
     ...mapGetters({
-      homeData: "getHomeInitData",
-    }),
+      homeData: "getHomeInitData"
+    })
   },
   created() {
     this.$store.dispatch("getHomeDataFn").then(() => {
@@ -146,20 +146,20 @@ export default {
       this.$router.push({
         path: "/goods",
         query: {
-          goodsId,
-        },
+          goodsId
+        }
       });
     },
     selectCity() {},
     onCancel() {
       this.search = "";
-    },
+    }
   },
   watch: {
     search() {
       // search
-    },
-  },
+    }
+  }
 };
 </script>
 <style>
@@ -295,5 +295,3 @@ div.recommend-title {
   }
 }
 </style>
-
- 

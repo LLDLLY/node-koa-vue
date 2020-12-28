@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import common from './common'
-import user from './user'
+import common from "./common";
+import user from "./user";
 
 Vue.use(Vuex);
 

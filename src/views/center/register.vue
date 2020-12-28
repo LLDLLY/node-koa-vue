@@ -1,6 +1,11 @@
 <template>
   <div>
-    <van-nav-bar title="用户注册" left-text="返回" left-arrow @click-left="goBack" />
+    <van-nav-bar
+      title="用户注册"
+      left-text="返回"
+      left-arrow
+      @click-left="goBack"
+    />
     <div class="register-panel">
       <van-field
         v-model="username"
@@ -8,7 +13,7 @@
         icon="clear"
         placeholder="请输入用户名"
         required
-        @click-icon="username=''"
+        @click-icon="username = ''"
         :error-message="usernameErrorMsg"
       />
       <van-field
@@ -26,7 +31,13 @@
       <router-link to="/login">已有账号？去登录</router-link>
     </div>
     <div class="register-button">
-      <van-button type="primary" size="large" @click="register" :loading="openLoading">马上注册</van-button>
+      <van-button
+        type="primary"
+        size="large"
+        @click="register"
+        :loading="openLoading"
+        >马上注册</van-button
+      >
     </div>
   </div>
 </template>
@@ -61,8 +72,8 @@ export default {
       this.$store.dispatch("userRegisterFn", params).then(data => {
         let res = data.data;
         _this.openLoading = false;
-        _this.username = '';
-        _this.password = '';
+        _this.username = "";
+        _this.password = "";
         Toast(res.mess);
         // status:'0' 账户已存在 status:'1' 注册成功
         if (res.status === "0") {
@@ -90,7 +101,7 @@ export default {
 };
 </script>
 
-<style lang='less' scoped>
+<style lang="less" scoped>
 .toregister {
   font-size: 0.7rem;
   text-align: right;
