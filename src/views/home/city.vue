@@ -7,6 +7,8 @@
       left-arrow
       @click-left="goBack"
     />
+    <!-- city -->
+    <div></div>
   </div>
 </template>
 <script>
