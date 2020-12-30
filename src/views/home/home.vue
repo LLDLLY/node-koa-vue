@@ -5,7 +5,7 @@
         <van-col span="4" @click="selectCity">
           <!-- 定位icon -->
           <img class="location-icon" :src="locationIcon" alt width="35%" />
-          <span class="city">{{ city }}</span>
+          <span class="city">{{ city.name || "上海" }}</span>
         </van-col>
         <!-- 搜索 -->
         <van-col span="20">
@@ -96,7 +96,7 @@
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
+import { mapState, mapGetters } from "vuex";
 import Banner from "../components/banner.vue";
 import Foods from "../components/foods.vue";
 import "swiper/dist/css/swiper.css";
@@ -112,7 +112,6 @@ export default {
     return {
       search: "",
       locationIcon: require("../../assets/img/location.png"),
-      city: "上海",
       imagesList: [],
       options: {
         slidesPerView: 2.5,
@@ -122,6 +121,7 @@ export default {
   computed: {
     ...mapGetters({
       homeData: "getHomeInitData",
+      city: "getCityGetter",
     }),
   },
   created() {

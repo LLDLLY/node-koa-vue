@@ -28,6 +28,7 @@
                 class="city-item"
                 v-for="(item, index) in cityData[item]"
                 :key="index"
+                @click="() => selectCity(item)"
               >
                 {{ item.name }}
               </li>
@@ -88,6 +89,10 @@ export default {
     });
   },
   methods: {
+    selectCity(item) {
+      this.$store.commit("setState", { city: item });
+      this.goBack();
+    },
     // 滚动到什么城市，active相应的字母
     getCurrentTop(e) {
       if (!e) return;
@@ -170,6 +175,9 @@ export default {
     border-radius: 0.25rem;
     margin: 0 0.5rem 0.5rem 0;
     background-color: rgb(245, 245, 245);
+    &:active {
+      background-color: #ccc;
+    }
   }
   .city-key-wrap {
     position: sticky;

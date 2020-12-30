@@ -3,6 +3,11 @@ import * as api from "../request/api";
 const state = {
   show: true,
   homeData: {},
+  city: {
+    id: 3,
+    name: "上海",
+    spell: "shanghai"
+  },
   hotCities: [],
   cityKeys: [],
   cityData: {},
@@ -68,6 +73,7 @@ const actions = {
 };
 
 const getters = {
+  getCityGetter: state => state.city,
   getHomeInitData: state => state.homeData,
   getGoodsDetailGetter: state => state.goodsDetail,
   getGoodSCommentGetter: state => state.goodsComments,
