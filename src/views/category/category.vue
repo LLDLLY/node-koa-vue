@@ -16,7 +16,8 @@
             <li
               v-for="(item, index) in goodsCategories"
               :key="index"
-              @click="getCategoriesChild(item.ID)"
+              @click="getCategoriesChild(item.ID, index)"
+              :class="`${mainActiveIndex === index ? 'active' : ''}`"
             >
               {{ item.MALL_CATEGORY_NAME }}
             </li>
@@ -81,16 +82,18 @@ export default {
   },
   created() {
     this.$store.dispatch("getGoodsCategoriesFn");
-    this.getCategoriesChild(1);
+    this.getCategoriesChild(1, 0);
   },
   methods: {
     backFn() {
       this.$router.back();
     },
-    getCategoriesChild(id) {
+    getCategoriesChild(id, index) {
+      // 保持tab 默认选中第一个
       this.active = 0;
+      this.mainActiveIndex = index;
       getCategoriesChildApi(id).then((res) => {
-        console.log(res);
+        // console.log(res);
         if (res.code == 200) {
           this.categoriesChild = res.result;
           // 大类切换，自动加载第一个tab里的数据
@@ -130,11 +133,6 @@ export default {
   },
 };
 </script>
-<style>
-.content .van-tabs__wrap {
-  z-index: 0;
-}
-</style>
 <style scoped lang="less">
 #Categorylist {
   height: 100%;
@@ -143,14 +141,16 @@ export default {
     height: 100%;
     .cate_big {
       height: 100%;
-      background-color: aliceblue;
+      background-color: #f8f8f8;
       li {
-        padding: 0.55rem 0;
+        padding: 0.48rem 0;
         font-size: 0.8rem;
         text-align: center;
         color: #666;
-        border-top: 1px solid #e4e7ed;
         border-bottom: 1px solid #e4e7ed;
+        &.active {
+          background-color: #fff;
+        }
       }
     }
     .cate_detail {
