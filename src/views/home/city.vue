@@ -52,30 +52,13 @@
 </template>
 <script>
 import { mapState } from "vuex";
-
-//节流throttle代码：
-function throttle(fn, delay) {
-  let canRun = true; // 通过闭包保存一个标记
-  return function () {
-    // 在函数开头判断标记是否为true，不为true则return
-    if (!canRun) return;
-    // 立即设置为false
-    canRun = false;
-    // 将外部传入的函数的执行放在setTimeout中
-    setTimeout(() => {
-      // 最后在setTimeout执行完毕后再把标记设置为true(关键)表示可以执行下一次循环了。
-      // 当定时器没有执行的时候标记永远是false，在开头被return掉
-      fn.apply(this, arguments);
-      canRun = true;
-    }, delay);
-  };
-}
-
+import { Utils } from "../../utiles/modules-index";
 export default {
   data() {
     return {
       refStr: "city_",
       activeIndex: 0,
+      clickKey: false, // 点击右侧字母，true，滚动
       heightList: [
         {
           top: 0,
@@ -100,7 +83,7 @@ export default {
     this.$nextTick(() => {
       this.$refs.cityPage.addEventListener(
         "scroll",
-        throttle(_this.getCurrentTop, 300)
+        Utils.throttle(_this.getCurrentTop, 300)
       );
     });
   },
@@ -108,7 +91,6 @@ export default {
     // 滚动到什么城市，active相应的字母
     getCurrentTop(e) {
       if (!e) return;
-
       const top = e.target.scrollTop;
       // 前指针 后指针
       let front = 0;
