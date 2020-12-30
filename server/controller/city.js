@@ -7,7 +7,7 @@ class CityController {
   static async getCityInitData(ctx) {
     ctx.body = {
       code: 200,
-      result: city,
+      result: city.data,
       success: true
     };
   }

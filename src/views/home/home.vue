@@ -96,7 +96,7 @@
   </div>
 </template>
 <script>
-import { mapState, mapActions, mapGetters } from "vuex";
+import { mapGetters } from "vuex";
 import Banner from "../components/banner.vue";
 import Foods from "../components/foods.vue";
 import "swiper/dist/css/swiper.css";

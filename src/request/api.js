@@ -2,7 +2,12 @@ import axios from "./index";
 
 // 首页信息
 export function getHomeInitDataApi() {
-  return axios.request("/home");
+  return axios.get("/home");
+}
+
+// 城市数据
+export function getCityApi() {
+  return axios.get("/city");
 }
 
 // 商品详情

@@ -3,6 +3,9 @@ import * as api from "../request/api";
 const state = {
   show: true,
   homeData: {},
+  hotCities: [],
+  cityKeys: [],
+  cityData: {},
   goodsDetail: {},
   goodsComments: {},
   goodsCategories: {}
@@ -49,6 +52,17 @@ const actions = {
     const res = await api.getCategoriesApi();
     if (res.code == 200) {
       commit("setState", { goodsCategories: res.result });
+    }
+  },
+  async getCityFn({ commit }) {
+    const res = await api.getCityApi();
+    if (res.code == 200) {
+      const result = res.result;
+      commit("setState", {
+        hotCities: result.hotCities,
+        cityData: result.cities,
+        cityKeys: Object.keys(result.cities)
+      });
     }
   }
 };
